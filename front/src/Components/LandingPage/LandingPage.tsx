@@ -9,7 +9,7 @@ function LandingPage() {
             <NavBar />
             
                 <div className={styles.textCenter}>
-                    <h3 className={styles.animateCharcter}> GESTION</h3>
+                    <h3 className={styles.animateCharcter}> TU ASISTENCIA</h3>
                 </div>
         
         </>

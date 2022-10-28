@@ -52,7 +52,7 @@ function NavBar() {
                             userSelect: 'none'
                         }}
                     >
-                        GESTION
+                        TU ASISTENCIA
                     </Typography>
 
                     <Box
@@ -130,7 +130,7 @@ function NavBar() {
                         }}
                         style={{ display: "none" }}
                     >
-                        GESTION
+                        TU ASISTENCIA
                     </Typography>
                     <Box
                         sx={{
