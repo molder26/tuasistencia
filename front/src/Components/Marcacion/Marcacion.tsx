@@ -3,7 +3,7 @@ import { ErrorMessage, Field, Form, Formik } from "formik";
 import * as Yup from "yup";
 import NavBar from "../NavBar/NavBar";
 
-function Invoice() {
+function Marcacion() {
     return (
         <>
             <NavBar />
@@ -44,4 +44,4 @@ function Invoice() {
     );
 }
 
-export default Invoice;
+export default Marcacion;

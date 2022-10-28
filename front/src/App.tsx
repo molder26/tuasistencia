@@ -1,10 +1,10 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
 import LandingPage from "./Components/LandingPage/LandingPage";
-import Client from "./Components/Client/Client";
-import Product from "./Components/Product/Product";
-import Invoice from "./Components/Invoice/Invoice";
-import Contact from "./Components/Contact/Contact";
+import Empleados from "./Components/Empleados/Empleados";
+import Informes from "./Components/Informes/Informes";
+import Marcacion from "./Components/Marcacion/Marcacion";
+import Contacto from "./Components/Contacto/Contacto";
 
 import "./App.css";
 
@@ -12,10 +12,10 @@ function App() {
     return (
         <Routes>
             <Route path="/" element={<LandingPage />} />
-            <Route path="/client" element={<Client />} />
-            <Route path="/Product" element={<Product />} />
-            <Route path="/invoice" element={<Invoice />} />
-            <Route path="/contact" element={<Contact />} />
+            <Route path="/empleados" element={<Empleados />} />
+            <Route path="/informes" element={<Informes />} />
+            <Route path="/marcacion" element={<Marcacion />} />
+            <Route path="/contacto" element={<Contacto />} />
         </Routes>
     );
 }

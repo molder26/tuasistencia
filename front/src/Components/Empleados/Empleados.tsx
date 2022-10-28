@@ -1,16 +1,16 @@
 import React from "react";
-import { TableClient } from "./TableClient";
+import { TablaEmpleados } from "./TablaEmpleados";
 import NavBar from "../NavBar/NavBar";
 import { FormDialog } from "./Modal";
 
-function Client() {
+function Empleados() {
     return (
         <>
             <NavBar />
             <FormDialog />
-            <TableClient />
+            <TablaEmpleados />
         </>
     );
 }
 
-export default Client;
+export default Empleados;

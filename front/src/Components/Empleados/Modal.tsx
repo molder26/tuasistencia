@@ -10,7 +10,7 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import { Input } from "@mui/material";
 
-import style from "./Client.module.css";
+import style from "./Empleados.module.css";
 
 const validationSchema = Yup.object().shape({
     name: Yup.string().required("El Campo nombre es requerido"),

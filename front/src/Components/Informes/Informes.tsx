@@ -3,7 +3,7 @@ import React from "react";
 import * as Yup from "yup";
 import NavBar from "../NavBar/NavBar";
 
-function Product() {
+function Informes() {
     return (
         <>
             <NavBar />
@@ -53,4 +53,4 @@ function Product() {
     );
 }
 
-export default Product;
+export default Informes;

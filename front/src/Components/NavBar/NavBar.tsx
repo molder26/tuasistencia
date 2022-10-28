@@ -12,7 +12,7 @@ import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 
-const pages = ["Client", "Product", "Invoice", "Contact"];
+const pages = ["Marcacion", "Empleados", "Informes", "Contacto"];
 
 function NavBar() {
     const location = useLocation();

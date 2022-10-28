@@ -11,7 +11,7 @@ const data = [
 ];
 const options = { filterType: 'checkbox'};
 
-export const TableClient = () => {
+export const TablaEmpleados = () => {
     return (
         <MUIDataTable
         title={"Lista de Clientes"}
