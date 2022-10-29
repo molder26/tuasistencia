@@ -4,7 +4,7 @@ const { DataTypes } = require("sequelize");
 // Luego le injectamos la conexion a sequelize.
 module.exports = (sequelize: Sequelize) => {
     // defino el modelo
-    sequelize.define("client", {
+    sequelize.define("employee", {
         id: {
             type: DataTypes.INTEGER,
             primaryKey: true,
@@ -17,15 +17,17 @@ module.exports = (sequelize: Sequelize) => {
                 len: [1, 100],
             },
         },
+        dni: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
         createdAt: {
             type: DataTypes.DATE,
             defaultValue: sequelize.literal('CURRENT_TIMESTAMP'),
-            allowNull: false,
         },
         updatedAt: {
             type: DataTypes.DATE,
             defaultValue: sequelize.literal('CURRENT_TIMESTAMP'),
-            allowNull: false,
         },
         deletedAt: {
             type: DataTypes.DATE,

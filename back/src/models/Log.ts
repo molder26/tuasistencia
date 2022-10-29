@@ -4,29 +4,27 @@ const { DataTypes } = require("sequelize");
 // Luego le injectamos la conexion a sequelize.
 module.exports = (sequelize: Sequelize) => {
     // defino el modelo
-    sequelize.define("detail", {
+    sequelize.define("log", {
         id: {
             type: DataTypes.INTEGER,
             primaryKey: true,
             autoIncrement: true,
         },
-        quantity: {
-            type: DataTypes.INTEGER,
+        isIn: {
+            type: DataTypes.BOOLEAN,
             allowNull: false,
         },
-        price: {
-            type: DataTypes.FLOAT,
-            allowNull: false,
+        PhotoURL: {
+            type: DataTypes.STRING,
+            allowNull: true,
         },
         createdAt: {
             type: DataTypes.DATE,
             defaultValue: sequelize.literal('CURRENT_TIMESTAMP'),
-            allowNull: false,
         },
         updatedAt: {
             type: DataTypes.DATE,
             defaultValue: sequelize.literal('CURRENT_TIMESTAMP'),
-            allowNull: false,
         },
     });
 };
