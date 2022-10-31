@@ -1,10 +1,10 @@
 import { Request, Response } from "express";
-const { Product } = require("../db");
+const { Employee } = require("../db");
 
 exports.getAll = async (req: Request, res: Response) => {
     try {
-        const products = await Product.findAll({ order: [["id", "ASC"]] });
-        return res.json(products);
+        const employees = await Employee.findAll({ order: [["name", "ASC"]] });
+        return res.json(employees);
     } catch (error) {
         console.log(error);
         res.status(400).json({
@@ -16,11 +16,11 @@ exports.getAll = async (req: Request, res: Response) => {
 exports.getById = async (req: Request, res: Response) => {
     const { id } = req.params;
     try {
-        const product = await Product.findByPk(id);
-        if (product) return res.json(product);
+        const employee = await Employee.findByPk(id);
+        if (employee) return res.json(employee);
 
         return res.status(404).json({
-            msg: "No se encuentra el producto " + id,
+            msg: "No se encuentra el empleado " + id,
         });
     } catch (error) {
         console.log(error);
@@ -33,10 +33,10 @@ exports.getById = async (req: Request, res: Response) => {
 exports.postId = async (req: Request, res: Response) => {
     const { body } = req;
     try {
-        const newProduct = new Product(body);
-        await newProduct.save();
+        const newEmployee = new Employee(body);
+        await newEmployee.save();
 
-        return res.json(newProduct);
+        return res.json(newEmployee);
     } catch (error) {
         console.log(error);
         res.status(500).json({
@@ -47,18 +47,19 @@ exports.postId = async (req: Request, res: Response) => {
 
 exports.putId = async (req: Request, res: Response) => {
     const { id } = req.params;
-    const { name } = req.body;
+    const { name, dni } = req.body;
     try {
-        const updatedProduct = await Product.findByPk(id);
-        if (!updatedProduct)
+        const updatedEmployee = await Employee.findByPk(id);
+        if (!updatedEmployee)
             return res
                 .status(404)
-                .json({ msg: "No se encontro el producto " + id });
+                .json({ msg: "No se encontro el empleado " + id });
 
-        updatedProduct.name = name;
-        await updatedProduct.save();
+        updatedEmployee.name = name;
+        updatedEmployee.dni = dni;
+        await updatedEmployee.save();
 
-        return res.json(updatedProduct);
+        return res.json(updatedEmployee);
     } catch (error) {
         console.log(error);
         res.status(500).json({
@@ -70,16 +71,16 @@ exports.putId = async (req: Request, res: Response) => {
 exports.deleteId = async (req: Request, res: Response) => {
     const { id } = req.params;
     try {
-        const product = await Product.findByPk(id);
-        if (!product)
+        const employee = await Employee.findByPk(id);
+        if (!employee)
             return res.status(404).json({
-                msg: "No se encuentra el Product " + id,
+                msg: "No se encuentra el empleado " + id,
             });
 
         let date = new Date();
-        product.deletedAt = date;
-        await product.save();
-        return res.json(product);
+        employee.deletedAt = date;
+        await employee.save();
+        return res.json(employee);
     } catch (error) {
         console.log(error);
         res.status(400).json({

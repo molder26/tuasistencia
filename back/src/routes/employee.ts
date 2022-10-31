@@ -7,7 +7,7 @@ const {
     postId,
     putId,
     deleteId,
-} = require("../controllers/client");
+} = require("../controllers/employee");
 
 router.get("/", getAll);
 router.get("/:id", getById);

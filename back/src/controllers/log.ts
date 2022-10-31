@@ -1,12 +1,10 @@
 import { Request, Response } from "express";
-const { Detail, Invoice, Product } = require("../db");
+const { Log } = require("../db");
 
 exports.getAll = async (req: Request, res: Response) => {
     try {
-        const details = await Detail.findAll({
-            include: [{ model: Invoice }, { model: Product }],
-        });
-        return res.json(details);
+        const log = await Log.findAll({ order: [["createdAt", "ASC"]] });
+        return res.json(log);
     } catch (error) {
         console.log(error);
         res.status(400).json({
@@ -15,24 +13,14 @@ exports.getAll = async (req: Request, res: Response) => {
     }
 };
 
-exports.getByInvoiceId = async (req: Request, res: Response) => {
+exports.getById = async (req: Request, res: Response) => {
     const { id } = req.params;
     try {
-        const invoice = await Invoice.findAll({
-            include: [
-                {
-                    model: Invoice,
-                    where: {
-                        id: id,
-                    },
-                },
-                { model: Product },
-            ],
-        });
-        if (invoice) return res.json(invoice);
+        const log = await Log.findByPk(id);
+        if (log) return res.json(log);
 
         return res.status(404).json({
-            msg: "No se encuentra la factura " + id,
+            msg: "No se encuentra el log " + id,
         });
     } catch (error) {
         console.log(error);
@@ -45,18 +33,10 @@ exports.getByInvoiceId = async (req: Request, res: Response) => {
 exports.postId = async (req: Request, res: Response) => {
     const { body } = req;
     try {
-        console.log(body);
-        const newDetail = new Detail(body);
-        await newDetail.save();
+        const newLog = await Log.create( body );
+        await newLog.setEmployee(body.employeeId);
 
-        body.items.forEach(async (i:{}) => {
-            try {
-                console.log(i)
-                // await newDetail.addProduct(i.id);
-            } catch (error) {}
-        });
-
-        return res.json(newDetail);
+        return res.json(newLog);
     } catch (error) {
         console.log(error);
         res.status(500).json({
