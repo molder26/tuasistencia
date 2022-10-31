@@ -3,14 +3,14 @@ import { Router } from "express";
 const router = Router();
 const {
     getAll,
-    getByInvoiceId,
+    getById,
     postId,
     // putId,
     // deleteId,
 } = require("../controllers/log");
 
 router.get("/", getAll);
-router.get("/:id", getByInvoiceId);
+router.get("/:id", getById);
 router.post("/", postId);
 // router.put("/:id", putId);
 // router.delete("/:id", deleteId);
