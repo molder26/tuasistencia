@@ -11,6 +11,7 @@ import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
+import logoAsist from "../../../public/imgs/logoAsist.jpg";
 
 const pages = ["Marcacion", "Empleados", "Informes", "Contacto"];
 
@@ -26,6 +27,7 @@ function NavBar() {
     };
 
     const handleCloseNavMenu = () => {
+
         setAnchorElNav(null);
     };
 
@@ -33,9 +35,9 @@ function NavBar() {
         <AppBar position="static">
             <Container maxWidth="xl">
                 <Toolbar disableGutters>
-                    <AdbIcon
+                    {/* <AdbIcon
                         sx={{ display: { xs: "none", md: "flex" }, mr: 1 }}
-                    />
+                    /> */}
                     <Typography
                         variant="h6"
                         noWrap
@@ -54,7 +56,9 @@ function NavBar() {
                     >
                         TU ASISTENCIA
                     </Typography>
-
+                         
+                            {/* <img src={logoAsist} alt="logo"/> */}
+                        
                     <Box
                         sx={{
                             flexGrow: 1,

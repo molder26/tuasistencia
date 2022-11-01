@@ -1,47 +1,64 @@
-import React from "react";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import * as Yup from "yup";
 import NavBar from "../NavBar/NavBar";
+import * as React from "react";
+import Button from "@mui/material/Button";
+import Box from "@mui/material/Box";
+import Dialog from "@mui/material/Dialog";
+import DialogContent from "@mui/material/DialogContent";
+import DialogTitle from "@mui/material/DialogTitle";
+import DialogContentText from "@mui/material/DialogContentText";
 
 function Marcacion() {
-    return (
-        <>
-            <NavBar />
-            <div>
-                <h1>Crear Factura</h1>
-            </div>
 
-            <Formik
-                initialValues={{ amount: 0, date: "" }}
-                validationSchema={Yup.object({
-                    amount: Yup.number().required(
-                        "El Campo nombre es requerido"
-                    ),
-                    date: Yup.string().required("El Campo nombre es requerido"),
-                })}
-                onSubmit={(values: any) => {
-                    console.log(values);
-                }}
-            >
-                <Form>
-                    <div>
-                        <label>Monto</label>
-                        <Field name="amount" type="number" />
 
-                        <ErrorMessage component="div" name="amount" />
-                    </div>
-                    <div>
-                        <label>fecha</label>
-                        <Field name="date" type="string" />
+    const [open, setOpen] = React.useState(false);
 
-                        <ErrorMessage component="div" name="date" />
-                    </div>
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
 
-                    <button type="submit">Enviar</button>
-                </Form>
-            </Formik>
-        </>
-    );
+     const handleClose = () => {
+      setOpen(false);
+     };
+    
+
+
+  return (
+    <>
+      <NavBar />
+
+      {/* <Formik
+        initialValues={{ amount: 0, date: "" }}
+        validationSchema={Yup.object({ */}
+           {/* amount: Yup.number().required("El Campo nombre es requerido"),
+            date: Yup.string().required("El Campo nombre es requerido"), */}
+        {/* })}
+        onSubmit={(values: any) => {
+          console.log(values);
+        }}
+      > */}
+
+     
+            <Box >
+              <Button style={{margin: '20% 0 0 40%', width:"20%", display:"flex", alignContent:"center"}} variant="contained" onClick={handleClickOpen}>Marcar</Button>
+            </Box>
+      
+            <Dialog open={open} onClose={handleClose}>
+                <DialogTitle>CARGA DE PRESENTISMO</DialogTitle>
+
+                <DialogContent>
+                    <DialogContentText>
+                      REPRESENTACION DE CODIGO QR
+                    </DialogContentText>
+      
+       
+
+        </DialogContent>
+            </Dialog>
+      {/* </Formik> */}
+    </>
+  );
 }
 
 export default Marcacion;
