@@ -38,7 +38,6 @@ function Marcacion() {
           console.log(values);
         }}
       > */}
-
      
             <Box >
               <Button style={{margin: '20% 0 0 40%', width:"20%", display:"flex", alignContent:"center"}} variant="contained" onClick={handleClickOpen}>Marcar</Button>
@@ -50,8 +49,7 @@ function Marcacion() {
                 <DialogContent>
                     <DialogContentText>
                       REPRESENTACION DE CODIGO QR
-                    </DialogContentText>
-      
+                    </DialogContentText>      
        
 
         </DialogContent>

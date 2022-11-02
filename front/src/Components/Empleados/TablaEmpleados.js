@@ -42,45 +42,55 @@ const columns = [
 		options: {
 			filter: true,
 			sort: false,
-			customBodyRenderLite: (dataIndex, rowIndex) => {
-				return (
-					<>
-						<IconButton
-							variant="contained"
-							color="primary"
-							onClick={() =>
-								window.alert(
-									`Clicked "Edit" for row ${rowIndex} with dataIndex of ${dataIndex}`
-								)
-							}
-						>
-							<EditIcon />
-						</IconButton>
-						<IconButton
-							variant="contained"
-							color="error"
-							onClick={() =>
-								window.alert(
-									`Clicked "Edit" for row ${rowIndex} with dataIndex of ${dataIndex}`
-								)
-							}
-						>
-							<DeleteIcon />
-						</IconButton>
-					</>
-				);
-			},
 		},
 	},
+
+	{
+		name: "Funciones",
+		label: "Funciones",		
+
+		customBodyRenderLite: (dataIndex, rowIndex) => {
+			return (
+				<>
+					<IconButton
+						variant="contained"
+						color="primary"
+						onClick={() =>
+							window.alert(
+								`Clicked "Edit" for row ${rowIndex} with dataIndex of ${dataIndex}`
+							)
+						}
+					>
+						<EditIcon />
+					</IconButton>
+					<IconButton
+						variant="contained"
+						color="error"
+						onClick={() =>
+							window.alert(
+								`Clicked "Edit" for row ${rowIndex} with dataIndex of ${dataIndex}`
+							)
+						}
+					>
+						<DeleteIcon />
+					</IconButton>
+				</>
+			);
+		},
+	
+	},
+
 ];
 
 export const TablaEmpleados = () => {
 	return (
 		<MUIDataTable
-			title={"Lista de Clientes"}
+			title={"Lista de Empleados"}
 			data={data}
 			columns={columns}
 			options={options}
+			// customBodyRenderLite={{DeleteIcon, EditIcon}}
+
 		/>
 	);
 };
