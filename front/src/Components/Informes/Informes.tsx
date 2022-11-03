@@ -15,13 +15,21 @@ import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
 
 
 function Informes() {
-  const [value, setValue] = React.useState<Dayjs | null>(
+  const [fechaInicio, setFechaInicio] = React.useState<Dayjs | null>(
+    dayjs(''),
+  );
+  const [fechaFin, setFechaFin] = React.useState<Dayjs | null>(
     dayjs(''),
   );
 
-  const handleChange = (newValue: Dayjs | null) => {
-    setValue(newValue);
+  const handleChangeInicio = (newValue: Dayjs | null) => {
+    setFechaInicio(newValue);
   };
+
+  const handleChangeFin = (newValue: Dayjs | null) => {
+    setFechaFin(newValue);
+  };
+
   return (
     <>
     <NavBar />
@@ -48,8 +56,8 @@ function Informes() {
         <DesktopDatePicker
           label="Fecha Inicio"
           inputFormat="DD/MM/YYYY"
-          value={value}
-          onChange={handleChange}
+          value={fechaInicio}
+          onChange={handleChangeInicio}
           renderInput={(params) => <TextField {...params} />}
         />      
       </Stack>
@@ -60,8 +68,8 @@ function Informes() {
   <DesktopDatePicker
     label="Fecha Fin"
     inputFormat="DD/MM/YYYY"
-    value={value}
-    onChange={handleChange}
+    value={fechaFin}
+    onChange={handleChangeFin}
     renderInput={(params) => <TextField {...params} />}
   />      
 </Stack>
