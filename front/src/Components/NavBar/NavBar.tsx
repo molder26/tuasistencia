@@ -60,10 +60,7 @@ function NavBar() {
               textDecoration: "none",
               userSelect: "none",
             }}
-          >
-           
-             
-      
+          >      
             TU ASISTENCIA
           </Typography>
 

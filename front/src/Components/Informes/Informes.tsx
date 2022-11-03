@@ -7,16 +7,30 @@ import TextField from "@mui/material/TextField";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import Typography from '@mui/material/Typography';
+import  dayjs, {Dayjs}  from 'dayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
+
+
 
 function Informes() {
+  const [value, setValue] = React.useState<Dayjs | null>(
+    dayjs(''),
+  );
+
+  const handleChange = (newValue: Dayjs | null) => {
+    setValue(newValue);
+  };
   return (
     <>
-      <NavBar />
-      <Box sx={{ width: '100%', maxWidth: 500 }}>
-      <Typography variant="h2" margin="auto"  gutterBottom>
+    <NavBar />
+      <Box sx={{ width: '100%', marginTop: "30px"}}>
+      <Typography variant="h4" align="center"  gutterBottom>
        Informe por Fecha
       </Typography>
-      </Box>
+      </Box>   
+
       <Box
         component="form"
         sx={{
@@ -28,26 +42,35 @@ function Informes() {
         justifyContent="center"
         marginTop="80px"     
       >
-        <div>
-          <TextField
-            label="Fecha Inicio"
-            id="outlined-size-normal"
-            defaultValue=""
-          />
-          <TextField
-            label="Fecha Fin"
-            id="outlined-size-normal"
-            defaultValue=""
-          
-          />
+    <LocalizationProvider dateAdapter={AdapterDayjs}>
+
+      <Stack spacing={3}>
+        <DesktopDatePicker
+          label="Fecha Inicio"
+          inputFormat="DD/MM/YYYY"
+          value={value}
+          onChange={handleChange}
+          renderInput={(params) => <TextField {...params} />}
+        />      
+      </Stack>
+    </LocalizationProvider>
+
+    <LocalizationProvider dateAdapter={AdapterDayjs}>   
+<Stack spacing={3}>
+  <DesktopDatePicker
+    label="Fecha Fin"
+    inputFormat="DD/MM/YYYY"
+    value={value}
+    onChange={handleChange}
+    renderInput={(params) => <TextField {...params} />}
+  />      
+</Stack>
+</LocalizationProvider>
+</Box>
            <Stack spacing={1} direction="column" width="200px" margin="auto" >
             <Button variant="contained">Buscar</Button>
             </Stack>
-        </div>
 
-         
-        
-      </Box>
     </>
   );
 }
