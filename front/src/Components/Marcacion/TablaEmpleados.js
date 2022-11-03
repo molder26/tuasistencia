@@ -1,5 +1,5 @@
 import MUIDataTable from "mui-datatables";
-// import BtnPresentismo from './BtnPresentismo';
+import BtnPresentismo from './BtnPresentismo';
 import { DialogTitle } from "@mui/material";
 import { Dialog } from "@mui/material";
 import { Button } from "@mui/material";
@@ -55,8 +55,13 @@ const columns = [
 			customBodyRenderLite: (dataIndex, rowIndex) => {
 				return (
 					<>
-						<IconButton
-							variant="contained"
+<Box>
+<BtnPresentismo 
+	variant="contained"
+/>
+</Box>
+						{/* <IconButton
+						
 							color="primary"
 							onClick={() =>
 								window.alert(
@@ -64,13 +69,13 @@ const columns = [
 								)
 							}
 						>
-							<EditIcon />
-						</IconButton>
+							
+						</IconButton> */}
 					</>
 				);
 			},
 
-			// 	<Box>
+			// 	
 			// 		  <Button style={{
 			// 			margin: "20% 0 0 40%",
 			// 			width: "20%",
@@ -82,7 +87,7 @@ const columns = [
 			// 		  >
 			// 			Marcar
 			// 		  </Button>
-			// 		</Box><Dialog open={open} onClose={handleClose}>
+			// 		<Dialog open={open} onClose={handleClose}>
 			// 			<DialogTitle>CARGA DE PRESENTISMO</DialogTitle>
 
 			// 			<DialogContent>

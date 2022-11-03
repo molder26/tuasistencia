@@ -24,8 +24,9 @@ function BtnPresentismo() {
       <>
   <Box>
         <Button style={{
-          margin: "20% 0 0 40%",
-          width: "20%",
+          margin: "0 0 0 10%",
+          width: "25%",
+          padding: "0 30px 0 30px",
           display: "flex",
           alignContent: "center",
         }}
