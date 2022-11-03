@@ -1,7 +1,7 @@
 import MUIDataTable from "mui-datatables";
 import EditIcon from "@mui/icons-material/Edit";
 import IconButton from "@mui/material/IconButton";
-import DeleteIcon from '@mui/icons-material/Delete';
+import DeleteIcon from "@mui/icons-material/Delete";
 
 const data = [
 	["jimmie", "klein", "oak lawn ave 526", "1-104-001-4567"],
@@ -47,39 +47,38 @@ const columns = [
 
 	{
 		name: "Funciones",
-		label: "Funciones",		
-
-		customBodyRenderLite: (dataIndex, rowIndex) => {
-			return (
-				<>
-					<IconButton
-						variant="contained"
-						color="primary"
-						onClick={() =>
-							window.alert(
-								`Clicked "Edit" for row ${rowIndex} with dataIndex of ${dataIndex}`
-							)
-						}
-					>
-						<EditIcon />
-					</IconButton>
-					<IconButton
-						variant="contained"
-						color="error"
-						onClick={() =>
-							window.alert(
-								`Clicked "Edit" for row ${rowIndex} with dataIndex of ${dataIndex}`
-							)
-						}
-					>
-						<DeleteIcon />
-					</IconButton>
-				</>
-			);
+		label: "Funciones",
+		options: {
+			customBodyRenderLite: (dataIndex, rowIndex) => {
+				return (
+					<>
+						<IconButton
+							variant="contained"
+							color="primary"
+							onClick={() =>
+								window.alert(
+									`Clicked "Edit" for row ${rowIndex} with dataIndex of ${dataIndex}`
+								)
+							}
+						>
+							<EditIcon />
+						</IconButton>
+						<IconButton
+							variant="contained"
+							color="error"
+							onClick={() =>
+								window.alert(
+									`Clicked "Edit" for row ${rowIndex} with dataIndex of ${dataIndex}`
+								)
+							}
+						>
+							<DeleteIcon />
+						</IconButton>
+					</>
+				);
+			},
 		},
-	
 	},
-
 ];
 
 export const TablaEmpleados = () => {
@@ -90,7 +89,6 @@ export const TablaEmpleados = () => {
 			columns={columns}
 			options={options}
 			// customBodyRenderLite={{DeleteIcon, EditIcon}}
-
 		/>
 	);
 };

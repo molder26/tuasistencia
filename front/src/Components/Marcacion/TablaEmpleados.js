@@ -1,10 +1,11 @@
 import MUIDataTable from "mui-datatables";
 // import BtnPresentismo from './BtnPresentismo';
-import { DialogTitle } from '@mui/material';
-import { Dialog } from '@mui/material';
-import { Button } from '@mui/material';
-import { Box } from '@mui/material';
-
+import { DialogTitle } from "@mui/material";
+import { Dialog } from "@mui/material";
+import { Button } from "@mui/material";
+import { Box } from "@mui/material";
+import EditIcon from "@mui/icons-material/Edit";
+import IconButton from "@mui/material/IconButton";
 
 const data = [
 	["jimmie", "klein", "oak lawn ave 526", "1-104-001-4567"],
@@ -48,34 +49,48 @@ const columns = [
 		},
 	},
 	{
-		name: "Mrcacion",
+		name: "Marcacion",
 		label: "Marcacion",
 		options: {
-	
-		// 	<Box>
-		// 		  <Button style={{
-		// 			margin: "20% 0 0 40%",
-		// 			width: "20%",
-		// 			display: "flex",
-		// 			alignContent: "center",
-		// 		  }}
-		// 			variant="contained"
-		// 			onClick={handleClickOpen}
-		// 		  >
-		// 			Marcar
-		// 		  </Button>
-		// 		</Box><Dialog open={open} onClose={handleClose}>
-		// 			<DialogTitle>CARGA DE PRESENTISMO</DialogTitle>
-		  
-		// 			<DialogContent>
-		// 			  <DialogContentText>REPRESENTACION DE CODIGO QR</DialogContentText>
-		// 			</DialogContent>
-		// 		  </Dialog>
-		
-		}
+			customBodyRenderLite: (dataIndex, rowIndex) => {
+				return (
+					<>
+						<IconButton
+							variant="contained"
+							color="primary"
+							onClick={() =>
+								window.alert(
+									`Clicked "Edit" for row ${rowIndex} with dataIndex of ${dataIndex}`
+								)
+							}
+						>
+							<EditIcon />
+						</IconButton>
+					</>
+				);
+			},
+
+			// 	<Box>
+			// 		  <Button style={{
+			// 			margin: "20% 0 0 40%",
+			// 			width: "20%",
+			// 			display: "flex",
+			// 			alignContent: "center",
+			// 		  }}
+			// 			variant="contained"
+			// 			onClick={handleClickOpen}
+			// 		  >
+			// 			Marcar
+			// 		  </Button>
+			// 		</Box><Dialog open={open} onClose={handleClose}>
+			// 			<DialogTitle>CARGA DE PRESENTISMO</DialogTitle>
+
+			// 			<DialogContent>
+			// 			  <DialogContentText>REPRESENTACION DE CODIGO QR</DialogContentText>
+			// 			</DialogContent>
+			// 		  </Dialog>
+		},
 	},
-
-
 ];
 
 export const TablaEmpleados = () => {
@@ -85,7 +100,6 @@ export const TablaEmpleados = () => {
 			data={data}
 			columns={columns}
 			options={options}
-
 		/>
 	);
 };
