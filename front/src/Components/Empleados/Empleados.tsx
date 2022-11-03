@@ -1,5 +1,5 @@
 import React from "react";
-import { TablaEmpleados } from "./TablaEmpleados";
+import { TablaEmpleados } from "./TablaEmpleadosEdit";
 import NavBar from "../NavBar/NavBar";
 import { FormDialog } from "./Modal";
 
