@@ -89,6 +89,7 @@ export const employeeSlice = createSlice({
 		builder.addCase(deleteEmployee.fulfilled, (state, action) => {
 			// Add user to the state array
 			console.log(action.payload);
+			state.values = state.values.filter(item =>item.id !== action.payload.id)
 		});
 	},
 });
