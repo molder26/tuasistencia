@@ -1,0 +1,5 @@
+{
+  "devDependencies": {
+    "@types/mui-datatables": "^3.7.9"
+  }
+}
