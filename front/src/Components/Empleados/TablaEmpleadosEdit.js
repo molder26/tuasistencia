@@ -26,11 +26,18 @@ export const TablaEmpleados = () => {
 		setEmployees(employeesState);
 	}, [employeesState]);
 
-	const handleClick = () => {
-		// dispatch(putEmployee({ id, name: "gabriel", dni: "987654" }));
-		// dispatch(createEmployee({ name: "pablito", dni: "987654" }));
-		// dispatch(deleteEmployee(3));
+	const handleClick = (id) => {
+		// dispatch(putEmployee({ id, name: "alejandro", dni: "98423654" }));
+		// dispatch(createEmployee({ name: "dieguitoo", dni: "12987654" }));
+		
 	};
+	const handleDelete = () =>{
+		dispatch(deleteEmployee(4));
+	}
+
+	const handleEdit = (id) =>{
+		dispatch(putEmployee({ id, name: "Josecito", dni: "33423654" }));
+	}
 
 	const columns = [
 		{
@@ -65,19 +72,21 @@ export const TablaEmpleados = () => {
 								// 	)
 								// }
 								onClick={() => {
-									handleClick(rowIndex + 1);
+									// handleClick(rowIndex + 1);
+									handleEdit()
 								}}
 							>
 								<EditIcon />
 							</IconButton>
+
+
 							<IconButton
 								variant="contained"
 								color="error"
 								onClick={() =>
-									window.alert(
-										`Clicked "Edit" for row ${rowIndex} with dataIndex of ${dataIndex}`
-									)
+									handleDelete()
 								}
+							
 							>
 								<DeleteIcon />
 							</IconButton>

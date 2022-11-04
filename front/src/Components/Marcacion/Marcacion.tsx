@@ -4,7 +4,6 @@ import { TablaEmpleados } from "./TablaEmpleados";
 
 
 function Marcacion() {
-  
 
   return (
     <>
