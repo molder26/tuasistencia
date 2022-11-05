@@ -80,16 +80,30 @@ export const employeeSlice = createSlice({
 		});
 		builder.addCase(putEmployee.fulfilled, (state, action) => {
 			// Add user to the state array
-			console.log(action);
+			state.values = state.values.map((item) => {
+				let { id, name, dni } = item;
+				if (item.id === action.payload.id) {
+					id = action.payload.id;
+					name = action.payload.name;
+					dni = action.payload.dni;
+				}
+
+				return {
+					id,
+					name,
+					dni,
+				};
+			});
 		});
 		builder.addCase(createEmployee.fulfilled, (state, action) => {
 			// Add user to the state array
-			console.log(action);
+			state.values.push(action.payload);
 		});
 		builder.addCase(deleteEmployee.fulfilled, (state, action) => {
 			// Add user to the state array
-			console.log(action.payload);
-			state.values = state.values.filter(item =>item.id !== action.payload.id)
+			state.values = state.values.filter(
+				(item) => item.id !== action.payload.id
+			);
 		});
 	},
 });
