@@ -2,33 +2,23 @@ import MUIDataTable from "mui-datatables";
 import EditIcon from "@mui/icons-material/Edit";
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { useAppDispatch, useAppSelector } from "../../app/hooks";
+import { useAppDispatch } from "../../app/hooks";
 import {
 	createEmployee,
 	deleteEmployee,
-	fetchAllEmployees,
 	putEmployee,
 } from "../../store/slices/employee/employeeSlice";
-import { useEffect, useState } from "react";
+import { useFetchEmployee } from "../../hooks/Empleados/useFetchEmployee";
 
 const options = { filterType: "checkbox" };
 
 export const TablaEmpleados = () => {
 	const dispatch = useAppDispatch();
-	const employeesState = useAppSelector((state) => state.employees.values);
-	const [employees, setEmployees] = useState(null);
-
-	useEffect(() => {
-		dispatch(fetchAllEmployees());
-	}, [dispatch]);
-
-	useEffect(() => {
-		setEmployees(employeesState);
-	}, [employeesState]);
+	const { employees, isFetching } = useFetchEmployee();
 
 	const handleClick = (id) => {
 		// dispatch(putEmployee({ id, name: "alejandro", dni: "98423654" }));
-		// dispatch(createEmployee({ name: "dieguitoo", dni: "12987654" }));
+		dispatch(createEmployee({ name: "dieguitoo", dni: "12987654" }));
 	};
 	const handleDelete = (id) => {
 		dispatch(deleteEmployee(id));
@@ -72,7 +62,7 @@ export const TablaEmpleados = () => {
 								variant="contained"
 								color="primary"
 								onClick={() => {
-									handleEdit(employeesState[dataIndex].id);
+									handleEdit(employees[dataIndex].id);
 								}}
 							>
 								<EditIcon />
@@ -82,7 +72,7 @@ export const TablaEmpleados = () => {
 								variant="contained"
 								color="error"
 								onClick={() =>
-									handleDelete(employeesState[dataIndex].id)
+									handleDelete(employees[dataIndex].id)
 								}
 							>
 								<DeleteIcon />
@@ -93,6 +83,8 @@ export const TablaEmpleados = () => {
 			},
 		},
 	];
+
+	if (isFetching) return <p>...Loading</p>;
 
 	return (
 		<>
