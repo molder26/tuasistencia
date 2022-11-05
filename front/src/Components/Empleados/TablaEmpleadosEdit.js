@@ -29,17 +29,22 @@ export const TablaEmpleados = () => {
 	const handleClick = (id) => {
 		// dispatch(putEmployee({ id, name: "alejandro", dni: "98423654" }));
 		// dispatch(createEmployee({ name: "dieguitoo", dni: "12987654" }));
-		
 	};
-	const handleDelete = () =>{
-		dispatch(deleteEmployee(4));
-	}
+	const handleDelete = (id) => {
+		dispatch(deleteEmployee(id));
+	};
 
-	const handleEdit = (id) =>{
+	const handleEdit = (id) => {
 		dispatch(putEmployee({ id, name: "Josecito", dni: "33423654" }));
-	}
+	};
 
 	const columns = [
+		{
+			name: "id",
+			options: {
+				display: false,
+			},
+		},
 		{
 			name: "name",
 			label: "Nombre",
@@ -60,33 +65,25 @@ export const TablaEmpleados = () => {
 			name: "Funciones",
 			label: "Funciones",
 			options: {
-				customBodyRenderLite: (dataIndex, rowIndex) => {
+				customBodyRenderLite: (dataIndex) => {
 					return (
 						<>
 							<IconButton
 								variant="contained"
 								color="primary"
-								// onClick={() =>
-								// 	window.alert(
-								// 		`Clicked "Edit" for row ${rowIndex} with dataIndex of ${dataIndex}`
-								// 	)
-								// }
 								onClick={() => {
-									// handleClick(rowIndex + 1);
-									handleEdit()
+									handleEdit(employeesState[dataIndex].id);
 								}}
 							>
 								<EditIcon />
 							</IconButton>
 
-
 							<IconButton
 								variant="contained"
 								color="error"
 								onClick={() =>
-									handleDelete()
+									handleDelete(employeesState[dataIndex].id)
 								}
-							
 							>
 								<DeleteIcon />
 							</IconButton>
@@ -105,7 +102,6 @@ export const TablaEmpleados = () => {
 					data={employees}
 					columns={columns}
 					options={options}
-					// customBodyRenderLite={{DeleteIcon, EditIcon}}
 				/>
 			)}
 		</>
