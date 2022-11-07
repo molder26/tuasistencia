@@ -30,12 +30,6 @@ export const TablaEmpleados = () => {
 
 	const columns = [
 		{
-			name: "id",
-			options: {
-				display: false,
-			},
-		},
-		{
 			name: "name",
 			label: "Nombre",
 			options: {
