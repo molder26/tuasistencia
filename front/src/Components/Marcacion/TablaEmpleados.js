@@ -57,9 +57,8 @@ export const TablaEmpleados = () => {
 					title={"Lista de Empleados"}
 					data={employees}
 					columns={columns}
-					// options={options}
           options={{
-            selectableRows: false // <===== will turn off checkboxes in rows
+            selectableRows: false
           }}
 				/>
 			)}
