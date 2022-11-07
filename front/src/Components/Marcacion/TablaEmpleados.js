@@ -10,7 +10,7 @@ import { useFetchEmployee } from "../../hooks/Empleados/useFetchEmployee";
 // 	["william", "hopkins", "vally view ln 1342", "1-478-001-0890"],
 // 	["miriam", "snyder", "saddle st 1388", "1-123-943-0563"],
 // ];
-const options = { filterType: "checkbox" };
+// const options = { filterType: "checkbox" };
 
 const columns = [
 	{
@@ -26,12 +26,12 @@ const columns = [
     label: "DNI",
     options: {
       filter: true,
-      sort: false,
+      sort: true,
     },
   },
 	{
-		name: "Marcacion",
-		label: "Marcacion",
+		name: "Marcar",
+		label: "Marcar",
 		options: {
 			customBodyRenderLite: (dataIndex, rowIndex) => {
 				return (
@@ -57,7 +57,10 @@ export const TablaEmpleados = () => {
 					title={"Lista de Empleados"}
 					data={employees}
 					columns={columns}
-					options={options}
+					// options={options}
+          options={{
+            selectableRows: false // <===== will turn off checkboxes in rows
+          }}
 				/>
 			)}
 		</>

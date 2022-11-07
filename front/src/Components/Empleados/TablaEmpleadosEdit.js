@@ -10,8 +10,6 @@ import {
 } from "../../store/slices/employee/employeeSlice";
 import { useFetchEmployee } from "../../hooks/Empleados/useFetchEmployee";
 
-const options = { filterType: "checkbox" };
-
 export const TablaEmpleados = () => {
 	const dispatch = useAppDispatch();
 	const { employees, isFetching } = useFetchEmployee();
@@ -87,7 +85,9 @@ export const TablaEmpleados = () => {
 					title={"Lista de Empleados"}
 					data={employees}
 					columns={columns}
-					options={options}
+					options={{
+						selectableRows: false,
+					}}
 				/>
 			)}
 		</>
