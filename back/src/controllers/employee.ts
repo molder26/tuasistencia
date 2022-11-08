@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { Op } from "sequelize";
-const { Employee } = require("../db");
+const { Employee, Log } = require("../db");
 
 exports.getAll = async (req: Request, res: Response) => {
 	try {
@@ -10,6 +10,31 @@ exports.getAll = async (req: Request, res: Response) => {
 				deletedAt: {
 					[Op.eq]: null,
 				},
+			},
+		});
+		return res.json(employees);
+	} catch (error) {
+		console.log(error);
+		res.status(400).json({
+			msg: error,
+		});
+	}
+};
+
+exports.getAllWithLastLog = async (req: Request, res: Response) => {
+	try {
+		const employees = await Employee.findAll({
+			order: [["name", "ASC"]],
+			where: {
+				deletedAt: {
+					[Op.eq]: null,
+				},
+			},
+			include: {
+				model: Log,
+				order: [["createdAt", "DESC"]],
+				// attributes: [],
+				limit: 1,
 			},
 		});
 		return res.json(employees);
