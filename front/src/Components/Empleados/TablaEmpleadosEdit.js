@@ -4,7 +4,6 @@ import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { useAppDispatch } from "../../app/hooks";
 import {
-	createEmployee,
 	deleteEmployee,
 	putEmployee,
 } from "../../store/slices/employee/employeeSlice";
@@ -24,9 +23,9 @@ import style from "./Empleados.module.css";
 
 const validationSchema = Yup.object().shape({
 	name: Yup.string().required("El Campo nombre es requerido"),
-	lastName: Yup.string().required("El Campo Apellido es requerido"),
-	address: Yup.string().required("El Campo Direccion es requerido"),
-	tel: Yup.string().required("El Campo Telefono es requerido"),
+	dni: Yup.string().required("El Campo dni es requerido"),
+	address: Yup.string().nullable().optional(),
+	phone: Yup.string().nullable().notRequired(),
 });
 
 export const TablaEmpleados = () => {
@@ -37,16 +36,16 @@ export const TablaEmpleados = () => {
 	const dispatch = useAppDispatch();
 	const { employees, isFetching } = useFetchEmployee();
 
-	const handleClick = (id) => {
-		// dispatch(putEmployee({ id, name: "alejandro", dni: "98423654" }));
-		dispatch(createEmployee({ name: "dieguitoo", dni: "12987654" }));
-	};
 	const handleDelete = (id) => {
 		dispatch(deleteEmployee(id));
 	};
 
-	const handleEdit = (id) => {
-		// dispatch(putEmployee({ id, name: "Josecito", dni: "33423654" }));
+	const handleEdit = (employee) => {
+		formik.setFieldValue("name", employee.name);
+		formik.setFieldValue("dni", employee.dni);
+		formik.setFieldValue("address", employee.address);
+		formik.setFieldValue("phone", employee.phone);
+		formik.setFieldValue("id", employee.id);
 		handleOpen();
 	};
 
@@ -68,6 +67,22 @@ export const TablaEmpleados = () => {
 			},
 		},
 		{
+			name: "address",
+			label: "Direccion",
+			options: {
+				filter: true,
+				sort: true,
+			},
+		},
+		{
+			name: "phone",
+			label: "Telefono",
+			options: {
+				filter: true,
+				sort: true,
+			},
+		},
+		{
 			name: "Funciones",
 			label: "Funciones",
 			options: {
@@ -78,7 +93,7 @@ export const TablaEmpleados = () => {
 								variant="contained"
 								color="primary"
 								onClick={() => {
-									handleEdit(employees[dataIndex].id);
+									handleEdit(employees[dataIndex]);
 								}}
 							>
 								<EditIcon />
@@ -103,14 +118,18 @@ export const TablaEmpleados = () => {
 	const formik = useFormik({
 		initialValues: {
 			name: "",
-			lastName: "",
-			address: "",
-			tel: "",
+			dni: "",
+			address: null,
+			phone: null,
+			id: "",
 		},
 		validationSchema: validationSchema,
 		onSubmit: (values) => {
 			console.log(values);
+			dispatch(putEmployee(values));
+			handleClose();
 		},
+		onReset: () => handleClose(),
 	});
 
 	if (isFetching) return <p>...Loading</p>;
@@ -157,18 +176,17 @@ export const TablaEmpleados = () => {
 						<div className={style.textFields}>
 							<TextField
 								fullWidth
-								id="lastName"
-								name="lastName"
-								label="Apellido"
-								value={formik.values.lastName}
+								id="dni"
+								name="dni"
+								label="DNI"
+								value={formik.values.dni}
 								onChange={formik.handleChange}
 								error={
-									formik.touched.lastName &&
-									Boolean(formik.errors.lastName)
+									formik.touched.dni &&
+									Boolean(formik.errors.dni)
 								}
 								helperText={
-									formik.touched.lastName &&
-									formik.errors.lastName
+									formik.touched.dni && formik.errors.dni
 								}
 								variant="outlined"
 								onBlur={formik.handleBlur}
@@ -180,7 +198,7 @@ export const TablaEmpleados = () => {
 								id="address"
 								name="address"
 								label="Direccion"
-								value={formik.values.address}
+								value={formik.values.address ?? ""}
 								onChange={formik.handleChange}
 								error={
 									formik.touched.address &&
@@ -197,17 +215,17 @@ export const TablaEmpleados = () => {
 						<div className={style.textFields}>
 							<TextField
 								fullWidth
-								id="tel"
-								name="tel"
-								label="Tel"
-								value={formik.values.tel}
+								id="phone"
+								name="phone"
+								label="Telefono"
+								value={formik.values.phone ?? ""}
 								onChange={formik.handleChange}
 								error={
-									formik.touched.tel &&
-									Boolean(formik.errors.tel)
+									formik.touched.phone &&
+									Boolean(formik.errors.phone)
 								}
 								helperText={
-									formik.touched.tel && formik.errors.tel
+									formik.touched.phone && formik.errors.phone
 								}
 								variant="outlined"
 								onBlur={formik.handleBlur}
@@ -216,10 +234,17 @@ export const TablaEmpleados = () => {
 						<Button
 							color="primary"
 							variant="contained"
-							fullWidth
 							type="submit"
 						>
-							Cargar
+							Guardar
+						</Button>
+						<Button
+							color="error"
+							variant="contained"
+							type="button"
+							onClick={() => formik.resetForm()}
+						>
+							Cancelar
 						</Button>
 					</form>
 				</DialogContent>

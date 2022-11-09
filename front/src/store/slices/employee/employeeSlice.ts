@@ -14,6 +14,8 @@ const initialState: EmployeeState = {
 type Employee = {
 	name: string;
 	dni: string;
+	address?: string;
+	phone?: string;
 };
 
 interface PutEmployee extends Employee {
@@ -30,21 +32,26 @@ export const fetchAllEmployees = createAsyncThunk(
 
 export const putEmployee = createAsyncThunk(
 	"employee/putEmployee",
-	async ({ id, name, dni }: PutEmployee) => {
+	async ({ id, name, dni, address, phone }: PutEmployee) => {
 		const response = await axios.put(API_URL + `/employee/${id}`, {
 			name,
 			dni,
+			address: address !== "" ? address : null,
+			phone: phone !== "" ? phone : null,
 		});
+		console.log(response.data);
 		return response.data;
 	}
 );
 
 export const createEmployee = createAsyncThunk(
 	"employee/createEmployee",
-	async ({ name, dni }: Employee) => {
+	async ({ name, dni, address, phone }: Employee) => {
 		const response = await axios.post(API_URL + `/employee/`, {
 			name,
 			dni,
+			address,
+			phone,
 		});
 		return response.data;
 	}
@@ -81,17 +88,21 @@ export const employeeSlice = createSlice({
 		builder.addCase(putEmployee.fulfilled, (state, action) => {
 			// Add user to the state array
 			state.values = state.values.map((item) => {
-				let { id, name, dni } = item;
+				let { id, name, dni, address, phone } = item;
 				if (item.id === action.payload.id) {
 					id = action.payload.id;
 					name = action.payload.name;
 					dni = action.payload.dni;
+					address = action.payload.address;
+					phone = action.payload.phone;
 				}
 
 				return {
 					id,
 					name,
 					dni,
+					address,
+					phone
 				};
 			});
 		});
