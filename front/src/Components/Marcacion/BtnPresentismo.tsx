@@ -22,7 +22,7 @@ function BtnPresentismo() {
       <Box>
         <Button
           style={{
-            margin: "0 0 0 10%",
+            margin: "0 0 0 -8%",
             width: "25%",
             padding: "0 30px 0 30px",
             display: "flex",
