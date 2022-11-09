@@ -80,7 +80,7 @@ exports.postId = async (req: Request, res: Response) => {
 
 exports.putId = async (req: Request, res: Response) => {
 	const { id } = req.params;
-	const { name, dni } = req.body;
+	const { name, dni, address, phone } = req.body;
 	try {
 		const updatedEmployee = await Employee.findByPk(id);
 		if (!updatedEmployee)
@@ -90,6 +90,8 @@ exports.putId = async (req: Request, res: Response) => {
 
 		updatedEmployee.name = name;
 		updatedEmployee.dni = dni;
+		updatedEmployee.address = address;
+		updatedEmployee.phone = phone;
 		await updatedEmployee.save();
 
 		return res.json(updatedEmployee);
