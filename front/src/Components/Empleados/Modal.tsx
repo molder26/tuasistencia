@@ -118,21 +118,26 @@ export function FormDialog() {
                 onBlur={formik.handleBlur}
               />
             </div>
-              <>
-            <Box   style={{
-           display: "flex", justifyContent: "space-around", margin: "5% 0 0 0" }}>
-            <Button color="primary" variant="contained" type="submit" >
-              Cargar
-            </Button>
-            <Button
-              color="error"
-              variant="contained"
-              type="button"
-              onClick={() => formik.resetForm()}
-            >
-              Cancelar
-            </Button>
-            </Box>
+            <>
+              <Box
+                style={{
+                  display: "flex",
+                  justifyContent: "space-around",
+                  margin: "5% 0 0 0",
+                }}
+              >
+                <Button color="primary" variant="contained" type="submit">
+                  Cargar
+                </Button>
+                <Button
+                  color="error"
+                  variant="contained"
+                  type="button"
+                  onClick={() => formik.resetForm()}
+                >
+                  Cancelar
+                </Button>
+              </Box>
             </>
           </form>
         </DialogContent>

@@ -14,10 +14,12 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import { useState } from "react";
-
 import style from "./Empleados.module.css";
 import { Box } from "@mui/material";
+import Spinner from "../spinner/Spinner";
+import Swal from 'sweetalert2';
 
+const Swal = require('sweetalert2');
 const validationSchema = Yup.object().shape({
 	name: Yup.string().required("El Campo nombre es requerido"),
 	dni: Yup.string().required("El Campo dni es requerido"),
@@ -34,7 +36,24 @@ export const TablaEmpleados = () => {
 	const { employees, isFetching } = useFetchEmployee();
 
 	const handleDelete = (id) => {
-		dispatch(deleteEmployee(id));
+		// dispatch(deleteEmployee(id));
+		Swal.fire({
+			title: 'Esta seguro que quiere eliminar Usuario?',
+			text: "No podra revertir esta accion!",
+			icon: 'warning',
+			showCancelButton: true,
+			confirmButtonColor: '#3085d6',
+			cancelButtonColor: '#d33',
+			confirmButtonText: 'Si, Eliminarlo!'
+		  }).then((result) => {
+			if (result.isConfirmed) {
+			  Swal.fire(
+				'Eliminado!',
+				'Usuario Eliminado Con Exito.',
+				'Exito'
+			  )
+			}
+		  })
 	};
 
 	const handleEdit = (employee) => {
@@ -129,7 +148,7 @@ export const TablaEmpleados = () => {
 		onReset: () => handleClose(),
 	});
 
-	if (isFetching) return <p>...Loading</p>;
+	if (isFetching) return <Spinner/>;
 
 	return (
 		<>
