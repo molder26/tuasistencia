@@ -19,7 +19,7 @@ import { Box } from "@mui/material";
 import Spinner from "../spinner/Spinner";
 import Swal from 'sweetalert2';
 
-const Swal = require('sweetalert2');
+const Swale = require('sweetalert2');
 const validationSchema = Yup.object().shape({
 	name: Yup.string().required("El Campo nombre es requerido"),
 	dni: Yup.string().required("El Campo dni es requerido"),
@@ -36,8 +36,8 @@ export const TablaEmpleados = () => {
 	const { employees, isFetching } = useFetchEmployee();
 
 	const handleDelete = (id) => {
-		// dispatch(deleteEmployee(id));
-		Swal.fire({
+		
+		Swale.fire({
 			title: 'Esta seguro que quiere eliminar Usuario?',
 			text: "No podra revertir esta accion!",
 			icon: 'warning',
@@ -47,6 +47,7 @@ export const TablaEmpleados = () => {
 			confirmButtonText: 'Si, Eliminarlo!'
 		  }).then((result) => {
 			if (result.isConfirmed) {
+				dispatch(deleteEmployee(id));
 			  Swal.fire(
 				'Eliminado!',
 				'Usuario Eliminado Con Exito.',
