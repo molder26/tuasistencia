@@ -9,15 +9,18 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 
 import style from "./Empleados.module.css";
+import { createEmployee } from "../../store/slices/employee/employeeSlice";
+import { useAppDispatch } from "../../app/hooks";
 
 const validationSchema = Yup.object().shape({
 	name: Yup.string().required("El Campo nombre es requerido"),
-	lastName: Yup.string().required("El Campo Apellido es requerido"),
-	address: Yup.string().required("El Campo Direccion es requerido"),
-	tel: Yup.string().required("El Campo Telefono es requerido"),
+	dni: Yup.string().required("El Campo dni es requerido"),
+	address: Yup.string().nullable().optional(),
+	phone: Yup.string().nullable().notRequired(),
 });
 
 export function FormDialog() {
+	const dispatch = useAppDispatch();
 	const [open, setOpen] = React.useState(false);
 
 	const handleClickOpen = () => {
@@ -31,23 +34,17 @@ export function FormDialog() {
 	const formik = useFormik({
 		initialValues: {
 			name: "",
-			lastName: "",
-			address: "",
-			tel: "",
+			dni: "",
+			address: null,
+			phone: null,
 		},
 		validationSchema: validationSchema,
 		onSubmit: (values: any) => {
-			console.log(values);
+			dispatch(createEmployee(values));
+			handleClose();
 		},
-    onReset: () => handleClose(),
+		onReset: () => handleClose(),
 	});
-
-	const ResettingForm = () => {
-		const { resetForm } = useFormikContext();
-		resetForm() // Store the value of resetForm in this variable
-		// return null;
-    console.log("entra");
-	};
 
 	return (
 		<div>
@@ -87,18 +84,17 @@ export function FormDialog() {
 						<div className={style.textFields}>
 							<TextField
 								fullWidth
-								id="lastName"
-								name="lastName"
-								label="Apellido"
-								value={formik.values.lastName}
+								id="dni"
+								name="dni"
+								label="DNI"
+								value={formik.values.dni}
 								onChange={formik.handleChange}
 								error={
-									formik.touched.lastName &&
-									Boolean(formik.errors.lastName)
+									formik.touched.dni &&
+									Boolean(formik.errors.dni)
 								}
 								helperText={
-									formik.touched.lastName &&
-									formik.errors.lastName
+									formik.touched.dni && formik.errors.dni
 								}
 								variant="outlined"
 								onBlur={formik.handleBlur}
@@ -110,7 +106,7 @@ export function FormDialog() {
 								id="address"
 								name="address"
 								label="Direccion"
-								value={formik.values.address}
+								value={formik.values.address || ""}
 								onChange={formik.handleChange}
 								error={
 									formik.touched.address &&
@@ -127,17 +123,17 @@ export function FormDialog() {
 						<div className={style.textFields}>
 							<TextField
 								fullWidth
-								id="tel"
-								name="tel"
-								label="Tel"
-								value={formik.values.tel}
+								id="phone"
+								name="phone"
+								label="Telefono"
+								value={formik.values.phone || ""}
 								onChange={formik.handleChange}
 								error={
-									formik.touched.tel &&
-									Boolean(formik.errors.tel)
+									formik.touched.phone &&
+									Boolean(formik.errors.phone)
 								}
 								helperText={
-									formik.touched.tel && formik.errors.tel
+									formik.touched.phone && formik.errors.phone
 								}
 								variant="outlined"
 								onBlur={formik.handleBlur}
@@ -154,7 +150,7 @@ export function FormDialog() {
 							color="error"
 							variant="contained"
 							type="button"
-              onClick={()=>formik.resetForm()}
+							onClick={() => formik.resetForm()}
 						>
 							Cancelar
 						</Button>

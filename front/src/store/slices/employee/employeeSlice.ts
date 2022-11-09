@@ -14,6 +14,8 @@ const initialState: EmployeeState = {
 type Employee = {
 	name: string;
 	dni: string;
+	address?: string;
+	phone?: string;
 };
 
 interface PutEmployee extends Employee {
@@ -41,10 +43,12 @@ export const putEmployee = createAsyncThunk(
 
 export const createEmployee = createAsyncThunk(
 	"employee/createEmployee",
-	async ({ name, dni }: Employee) => {
+	async ({ name, dni, address, phone }: Employee) => {
 		const response = await axios.post(API_URL + `/employee/`, {
 			name,
 			dni,
+			address,
+			phone,
 		});
 		return response.data;
 	}
