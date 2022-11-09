@@ -4,7 +4,6 @@ import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { useAppDispatch } from "../../app/hooks";
 import {
-	createEmployee,
 	deleteEmployee,
 	putEmployee,
 } from "../../store/slices/employee/employeeSlice";
@@ -13,7 +12,7 @@ import { useFetchEmployee } from "../../hooks/Empleados/useFetchEmployee";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Dialog from "@mui/material/Dialog";
-import { useFormik, useFormikContext } from "formik";
+import { useFormik } from "formik";
 import * as Yup from "yup";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
@@ -30,7 +29,6 @@ const validationSchema = Yup.object().shape({
 });
 
 export const TablaEmpleados = () => {
-	const { setFieldValue } = useFormikContext();
 	const [open, setOpen] = useState(false);
 	const handleOpen = () => setOpen(true);
 	const handleClose = () => setOpen(false);
@@ -38,22 +36,16 @@ export const TablaEmpleados = () => {
 	const dispatch = useAppDispatch();
 	const { employees, isFetching } = useFetchEmployee();
 
-	const handleClick = (id) => {
-		// dispatch(putEmployee({ id, name: "alejandro", dni: "98423654" }));
-		dispatch(createEmployee({ name: "dieguitoo", dni: "12987654" }));
-	};
 	const handleDelete = (id) => {
 		dispatch(deleteEmployee(id));
 	};
 
 	const handleEdit = (employee) => {
-		setFieldValue("name", employee.name);
-		// formik.initialValues= {
-		// 	name: employee.name,
-		// 	dni: employee.dni,
-		// 	address: employee.address,
-		// 	phone: employee.phone,
-		// }
+		formik.setFieldValue("name", employee.name);
+		formik.setFieldValue("dni", employee.dni);
+		formik.setFieldValue("address", employee.address);
+		formik.setFieldValue("phone", employee.phone);
+		formik.setFieldValue("id", employee.id);
 		handleOpen();
 	};
 
@@ -129,11 +121,13 @@ export const TablaEmpleados = () => {
 			dni: "",
 			address: null,
 			phone: null,
+			id: "",
 		},
 		validationSchema: validationSchema,
 		onSubmit: (values) => {
 			console.log(values);
-			// dispatch(putEmployee({ id, name: "Josecito", dni: "33423654" }));
+			dispatch(putEmployee(values));
+			handleClose();
 		},
 		onReset: () => handleClose(),
 	});
@@ -204,7 +198,7 @@ export const TablaEmpleados = () => {
 								id="address"
 								name="address"
 								label="Direccion"
-								value={formik.values.address || ""}
+								value={formik.values.address ?? ""}
 								onChange={formik.handleChange}
 								error={
 									formik.touched.address &&
@@ -224,7 +218,7 @@ export const TablaEmpleados = () => {
 								id="phone"
 								name="phone"
 								label="Telefono"
-								value={formik.values.phone || ""}
+								value={formik.values.phone ?? ""}
 								onChange={formik.handleChange}
 								error={
 									formik.touched.phone &&
