@@ -2,14 +2,10 @@ import MUIDataTable from "mui-datatables";
 import BtnPresentismo from "./BtnPresentismo";
 import { Box } from "@mui/material";
 import { useFetchEmployee } from "../../hooks/Empleados/useFetchEmployee";
-// import { useAppDispatch } from "../../app/hooks";
+import Spinner from "../spinner/Spinner";
 
-// const data = [
-// 	["jimmie", "klein", "oak lawn ave 526", "1-104-001-4567"],
-// 	["kate", "hale", "avondale ave 345", "1-678-456-1934"],
-// 	["william", "hopkins", "vally view ln 1342", "1-478-001-0890"],
-// 	["miriam", "snyder", "saddle st 1388", "1-123-943-0563"],
-// ];
+
+
 // const options = { filterType: "checkbox" };
 
 const columns = [
@@ -45,10 +41,10 @@ const columns = [
 ];
 
 export const TablaEmpleados = () => {
-	// const dispatch = useAppDispatch();
+	
 	const { employees, isFetching } = useFetchEmployee();
 
-	if (isFetching) return <p>...Loading</p>;
+	if (isFetching) return <Spinner/>
 
 	return (
 		<>
