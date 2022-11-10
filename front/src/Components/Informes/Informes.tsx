@@ -8,6 +8,7 @@ import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import Typography from '@mui/material/Typography';
 import  dayjs, {Dayjs}  from 'dayjs';
+import { TablaInformes } from './tablaInformes';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
@@ -79,6 +80,11 @@ function Informes() {
             <Button variant="contained">Buscar</Button>
             </Stack>
 
+<Box style={{  margin: "5% 0 0 0"}}>
+
+<TablaInformes/>
+
+</Box>
     </>
   );
 }
