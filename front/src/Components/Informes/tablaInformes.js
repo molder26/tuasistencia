@@ -6,6 +6,8 @@ import { useFetchEmployee } from "../../hooks/Empleados/useFetchEmployee";
 export const TablaInformes = () => {
 
     const { employees, isFetching } = useFetchEmployee();
+
+    
     const columns = [
         {
             name: "name",
