@@ -3,10 +3,9 @@ import BtnPresentismo from "./BtnPresentismo";
 import { Box } from "@mui/material";
 import { useFetchEmployee } from "../../hooks/Empleados/useFetchEmployee";
 import Spinner from "../spinner/Spinner";
+import { useState } from "react";
 
 
-
-// const options = { filterType: "checkbox" };
 
 const columns = [
 	{
@@ -43,6 +42,8 @@ const columns = [
 export const TablaEmpleados = () => {
 	
 	const { employees, isFetching } = useFetchEmployee();
+	
+
 
 	if (isFetching) return <Spinner/>
 
