@@ -9,15 +9,17 @@ import style from "./Btn.module.css";
 
 
 function BtnPresentismo() {
-  const [open, setOpen] = React.useState(false);
-  const [state, setState] = React.useState(true);
+  let [open, setOpen] = React.useState(false);
 
+let  [state, setState] = React.useState(true);
 
 
   const handleClickOpen = () => {
     setOpen(true);
     setState(!state);
+   
   };
+
 
   const handleClose = () => {
     setOpen(false);
@@ -32,13 +34,15 @@ function BtnPresentismo() {
             width: "25%",
             padding: "0 30px 0 30px",
             display: "flex",
-            alignContent: "center",          
+            alignContent: "center",    
+             backgroundColor:(state ? '' :'red')
           }}
           variant="contained"
-          onclick={handleClickOpen}       
+          onClick={handleClickOpen}
+        //  className = {(state ?  style.toogleEgreso  : '')}
           >
 
-          {/* // {state ? className={style.toogleEgreso} : ""} */}
+
           
          {state ? 'Ingreso' : 'Egreso' }
           </Button>
