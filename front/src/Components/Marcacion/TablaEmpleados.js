@@ -3,27 +3,26 @@ import BtnPresentismo from "./BtnPresentismo";
 import { Box } from "@mui/material";
 import { useFetchEmployee } from "../../hooks/Empleados/useFetchEmployee";
 import Spinner from "../spinner/Spinner";
-import { useState } from "react";
-
+import QRCode from "react-qr-code";
 
 
 const columns = [
 	{
-    name: "name",
-    label: "Nombre",
-    options: {
-      filter: true,
-      sort: true,
-    },
-  },
-  {
-    name: "dni",
-    label: "DNI",
-    options: {
-      filter: true,
-      sort: true,
-    },
-  },
+		name: "name",
+		label: "Nombre",
+		options: {
+			filter: true,
+			sort: true,
+		},
+	},
+	{
+		name: "dni",
+		label: "DNI",
+		options: {
+			filter: true,
+			sort: true,
+		},
+	},
 	{
 		name: "Marcar",
 		label: "Marcar",
@@ -40,15 +39,16 @@ const columns = [
 ];
 
 export const TablaEmpleados = () => {
-	
+
 	const { employees, isFetching } = useFetchEmployee();
-	
 
 
-	if (isFetching) return <Spinner/>
+
+	if (isFetching) return <Spinner />
 
 	return (
 		<>
+		
 			{employees && (
 				<MUIDataTable
 					title={"Lista de Empleados"}
@@ -57,8 +57,9 @@ export const TablaEmpleados = () => {
           options={{
             selectableRows: false
           }}
-				/>
+			/>
 			)}
+
 		</>
 	);
 };
