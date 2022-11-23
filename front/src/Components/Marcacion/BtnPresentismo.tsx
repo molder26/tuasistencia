@@ -3,24 +3,13 @@ import { Dialog } from "@mui/material";
 import { Button } from "@mui/material";
 import { Box } from "@mui/material";
 import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
 import React from "react";
 import QRCode from "react-qr-code";
 
 
 
-
-
-
 function BtnPresentismo() {
-
-
-
   
-
-
-
-
   let [open, setOpen] = React.useState(false);
 
   let [state, setState] = React.useState(true);
@@ -55,7 +44,7 @@ function BtnPresentismo() {
       </Box>
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>CARGA DE PRESENTISMO</DialogTitle>
-
+        <br/>
         <DialogContent>
         <QRCode  value="Aca el valor que quieras dar" />
         </DialogContent>

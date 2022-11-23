@@ -5,11 +5,12 @@ import Empleados from "./Components/Empleados/Empleados";
 import Informes from "./Components/Informes/Informes";
 import Marcacion from "./Components/Marcacion/Marcacion";
 import Contacto from "./Components/Contacto/Contacto";
-
 import "./App.css";
+
 
 function App() {
     return (
+
         <Routes>
             <Route path="/" element={<LandingPage />} />
             <Route path="/empleados" element={<Empleados />} />
