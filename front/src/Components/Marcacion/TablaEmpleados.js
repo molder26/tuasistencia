@@ -6,43 +6,43 @@ import Spinner from "../spinner/Spinner";
 import QRCode from "react-qr-code";
 
 
-const columns = [
-	{
-		name: "name",
-		label: "Nombre",
-		options: {
-			filter: true,
-			sort: true,
-		},
-	},
-	{
-		name: "dni",
-		label: "DNI",
-		options: {
-			filter: true,
-			sort: true,
-		},
-	},
-	{
-		name: "Marcar",
-		label: "Marcar",
-		options: {
-			customBodyRenderLite: (dataIndex, rowIndex) => {
-				return (
-					<Box>
-						<BtnPresentismo variant="contained" />
-					</Box>
-				);
-			},
-		},
-	},
-];
+
 
 export const TablaEmpleados = () => {
 
 	const { employees, isFetching } = useFetchEmployee();
 
-
+	const columns = [
+		{
+			name: "name",
+			label: "Nombre",
+			options: {
+				filter: true,
+				sort: true,
+			},
+		},
+		{
+			name: "dni",
+			label: "DNI",
+			options: {
+				filter: true,
+				sort: true,
+			},
+		},
+		{
+			name: "Marcar",
+			label: "Marcar",
+			options: {
+				customBodyRenderLite: (dataIndex, rowIndex) => {
+					return (
+						<Box>
+							<BtnPresentismo variant="contained" employee={employees[dataIndex]} />
+						</Box>
+					);
+				},
+			},
+		},
+	];
 
 	if (isFetching) return <Spinner />
 
@@ -57,6 +57,7 @@ export const TablaEmpleados = () => {
           options={{
             selectableRows: false
           }}
+
 			/>
 			)}
 
