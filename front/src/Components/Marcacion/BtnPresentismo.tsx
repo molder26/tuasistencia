@@ -3,20 +3,21 @@ import { Dialog } from "@mui/material";
 import { Button } from "@mui/material";
 import { Box } from "@mui/material";
 import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
 import React, { useEffect, useState } from "react";
 import QRCode from "react-qr-code";
 import { io } from "socket.io-client";
 
 const socket = io("localhost:3001");
 
-function BtnPresentismo() {
+function BtnPresentismo({ employee }: any) {
 	let [open, setOpen] = React.useState(false);
 
 	let [state, setState] = React.useState(true);
 
 	const handleClickOpen = () => {
-		setOpen(true);
 		setState(!state);
+		setOpen(true);
 		// connectSocket();
 	};
 
@@ -72,10 +73,10 @@ function BtnPresentismo() {
 				</Button>
 			</Box>
 			<Dialog open={open} onClose={handleClose}>
-				<DialogTitle>CARGA DE PRESENTISMO</DialogTitle>
-				<br />
+				<DialogTitle>Marcar {state ? "Entrada" : "Salida"}</DialogTitle>
 				<DialogContent>
-					<QRCode value="Aca el valor que quieras dar" />
+					<p>{`${employee.name} DNI ${employee.dni}`}</p>
+					<QRCode value={(state ? "Ingreso-" : "Egreso-") + employee.dni} />
 				</DialogContent>
 			</Dialog>
 			<div>
