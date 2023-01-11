@@ -25,7 +25,7 @@ interface PutEmployee extends Employee {
 export const fetchAllEmployees = createAsyncThunk(
 	"employee/fetchAllEmployees",
 	async () => {
-		const response = await axios.get(API_URL + "/employee");
+		const response = await axios.get(API_URL + "/employee/wlogs");
 		return response.data;
 	}
 );

@@ -3,45 +3,52 @@ import { Dialog } from "@mui/material";
 import { Button } from "@mui/material";
 import { Box } from "@mui/material";
 import DialogContent from "@mui/material/DialogContent";
-import React, {useState } from "react";
+import { useEffect, useState } from "react";
 import QRCode from "react-qr-code";
-import { io } from "socket.io-client";
-import DisabledByDefaultIcon from "@mui/icons-material/DisabledByDefault";
+// import { io } from "socket.io-client";
+import IconButton from "@mui/material/IconButton";
+import CloseIcon from "@mui/icons-material/Close";
+import { useAppDispatch } from "../../app/hooks";
+import { fetchAllEmployees } from "../../store/slices/employee/employeeSlice";
 
-const socket = io("localhost:3001");
+// const socket = io("localhost:3001");
 
 function BtnPresentismo({ employee }: any) {
-	let [open, setOpen] = React.useState(false);
+	const dispatch = useAppDispatch();
+	
+	const [open, setOpen] = useState(false);
+	let oldState = employee.logs[0] ?? false;
+	
+	const [state, setState] = useState(!oldState.isIn);
 
-	let [state, setState] = React.useState(true);
-
+	useEffect(() => {
+		setState(!oldState.isIn);
+	}, [oldState])
+	
 	const handleClickOpen = () => {
-		setState(!state);
 		setOpen(true);
 		// connectSocket();
 	};
 
 	const handleClose = () => {
+		dispatch(fetchAllEmployees());
 		setOpen(false);
 	};
 
-	const connectSocket = () => {
-	// client-side
-		socket.on("connect", () => {
-			console.log(socket.id); // x8WIv7-mJelg7on_ALbx
-		});
+	// const connectSocket = () => {
+	// 	// client-side
+	// 	socket.on("connect", () => {
+	// 		console.log(socket.id); // x8WIv7-mJelg7on_ALbx
+	// 	});
 
-		socket.on("disconnect", () => {
-			console.log(socket.id); // undefined
-		});
-	};
+	// 	socket.on("disconnect", () => {
+	// 		console.log(socket.id); // undefined
+	// 	});
+	// };
 
-	const [isConnected, setIsConnected] = useState(socket.connected);
-
-
+	// const [isConnected, setIsConnected] = useState(socket.connected);
 
 	//--------------------------------------------
-
 
 	// useEffect(() => {
 	// 	socket.on("connect", () => {
@@ -58,7 +65,7 @@ function BtnPresentismo({ employee }: any) {
 	// 		socket.off("pong");
 	// 	};
 	// }, []);
- // ----------------------------------------------------------
+	// ----------------------------------------------------------
 	return (
 		<>
 			<Box>
@@ -73,23 +80,34 @@ function BtnPresentismo({ employee }: any) {
 					}}
 					variant="contained"
 					onClick={handleClickOpen}
-					>
+				>
 					{state ? "Ingreso" : "Egreso"}
 				</Button>
-			
 			</Box>
-			<Dialog open={open} onClose={handleClose} >
-				{<DisabledByDefaultIcon display="flex" direction="row" justify-content="end" />}
+			<Dialog open={open} onClose={handleClose}>
+				<IconButton
+					aria-label="close"
+					onClick={handleClose}
+					sx={{
+						position: "absolute",
+						right: 8,
+						top: 8,
+						color: (theme) => theme.palette.grey[500],
+					}}
+				>
+					<CloseIcon />
+				</IconButton>
 				<DialogTitle>Marcar {state ? "Entrada" : "Salida"}</DialogTitle>
 				<DialogContent>
 					<p>{`${employee.name} DNI ${employee.dni}`}</p>
-					<QRCode value={(state ? "Ingreso-" : "Egreso-") + employee.dni} />
+					<QRCode
+						value={(state ? "Ingreso-" : "Egreso-") + employee.dni}
+					/>
 				</DialogContent>
-				
 			</Dialog>
-			<div>
+			{/* <div>
 				<p>Connected: {"" + isConnected}</p>
-			</div>
+			</div> */}
 		</>
 	);
 }

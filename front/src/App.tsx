@@ -17,6 +17,7 @@ function App() {
             <Route path="/informes" element={<Informes />} />
             <Route path="/marcacion" element={<Marcacion />} />
             <Route path="/contacto" element={<Contacto />} />
+            {/* <Route path="/qrscanner" element={<QrScanner />} /> */}
         </Routes>
     );
 }
