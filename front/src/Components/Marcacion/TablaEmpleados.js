@@ -3,8 +3,6 @@ import BtnPresentismo from "./BtnPresentismo";
 import { Box } from "@mui/material";
 import { useFetchEmployee } from "../../hooks/Empleados/useFetchEmployee";
 import Spinner from "../spinner/Spinner";
-import QRCode from "react-qr-code";
-
 
 
 
@@ -12,6 +10,8 @@ export const TablaEmpleados = () => {
 
 	const { employees, isFetching } = useFetchEmployee();
 
+	// console.log(employees)
+	
 	const columns = [
 		{
 			name: "name",
