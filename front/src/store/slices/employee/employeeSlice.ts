@@ -65,6 +65,17 @@ export const deleteEmployee = createAsyncThunk(
 	}
 );
 
+export const uploadStates = createAsyncThunk(
+	"employee/uploadStates",
+	async ({ states, id }: any) => {
+		const response = await axios.post(API_URL + `/employee/state/${id}`, {
+		states
+		});
+		console.log(response.data);
+		return response.data;
+	}
+);
+
 export const employeeSlice = createSlice({
 	name: "employee",
 	initialState,
