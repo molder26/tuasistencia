@@ -11,6 +11,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import { useAppDispatch } from "../../app/hooks";
 import { fetchAllEmployees } from "../../store/slices/employee/employeeSlice";
 
+
 // const socket = io("localhost:3001");
 
 function BtnPresentismo({ employee }: any) {
@@ -101,7 +102,7 @@ function BtnPresentismo({ employee }: any) {
 				<DialogContent>
 					<p>{`${employee.name} DNI ${employee.dni}`}</p>
 					<QRCode
-						value={`http://localhost:3000/qr/${state ? 0 : 1 }/${ employee.dni}`}
+						value={`http://192.168.1.153:3000/qr/${state ? 0 : 1 }/${ employee.dni}`}
 					/>
 				</DialogContent>
 			</Dialog>
