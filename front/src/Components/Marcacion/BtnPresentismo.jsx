@@ -10,21 +10,30 @@ import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 import { useAppDispatch } from "../../app/hooks";
 import { fetchAllEmployees } from "../../store/slices/employee/employeeSlice";
+import { internalIpV4 } from "internal-ip";
 
 // const socket = io("localhost:3001");
 
-function BtnPresentismo({ employee }: any) {
+function BtnPresentismo({ employee }) {
 	const dispatch = useAppDispatch();
-	
+
 	const [open, setOpen] = useState(false);
 	let oldState = employee.logs[0] ?? false;
-	
+
 	const [state, setState] = useState(!oldState.isIn);
+	const [ip, setIp] = useState(undefined);
 
 	useEffect(() => {
 		setState(!oldState.isIn);
-	}, [oldState])
-	
+	}, [oldState]);
+
+	useEffect(() => {
+		async function getIp() {
+			setIp(await internalIpV4());
+		}
+		getIp();
+	}, []);
+
 	const handleClickOpen = () => {
 		setOpen(true);
 		// connectSocket();
@@ -35,37 +44,6 @@ function BtnPresentismo({ employee }: any) {
 		setOpen(false);
 	};
 
-	// const connectSocket = () => {
-	// 	// client-side
-	// 	socket.on("connect", () => {
-	// 		console.log(socket.id); // x8WIv7-mJelg7on_ALbx
-	// 	});
-
-	// 	socket.on("disconnect", () => {
-	// 		console.log(socket.id); // undefined
-	// 	});
-	// };
-
-	// const [isConnected, setIsConnected] = useState(socket.connected);
-
-	//--------------------------------------------
-
-	// useEffect(() => {
-	// 	socket.on("connect", () => {
-	// 		setIsConnected(true);
-	// 	});
-
-	// 	socket.on("disconnect", () => {
-	// 		setIsConnected(false);
-	// 	});
-
-	// 	return () => {
-	// 		socket.off("connect");
-	// 		socket.off("disconnect");
-	// 		socket.off("pong");
-	// 	};
-	// }, []);
-	// ----------------------------------------------------------
 	return (
 		<>
 			<Box>
@@ -101,7 +79,9 @@ function BtnPresentismo({ employee }: any) {
 				<DialogContent>
 					<p>{`${employee.name} DNI ${employee.dni}`}</p>
 					<QRCode
-						value={(state ? "Ingreso-" : "Egreso-") + employee.dni}
+						value={`http://${ip}:3000/qr/${state ? 0 : 1}/${
+							employee.dni
+						}`}
 					/>
 				</DialogContent>
 			</Dialog>
