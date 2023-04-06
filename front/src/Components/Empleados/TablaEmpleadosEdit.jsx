@@ -19,7 +19,7 @@ import { Box } from "@mui/material";
 import Spinner from "../spinner/Spinner";
 import Swal from 'sweetalert2';
 
-const Swale = require('sweetalert2');
+import Swale from 'sweetalert2';
 const validationSchema = Yup.object().shape({
 	name: Yup.string().required("El Campo nombre es requerido"),
 	dni: Yup.string().required("El Campo dni es requerido"),

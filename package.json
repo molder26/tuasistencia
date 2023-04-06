@@ -1,5 +1,10 @@
 {
   "devDependencies": {
     "@types/mui-datatables": "^3.7.9"
+  },
+  "dependencies": {
+    "@esbuild-plugins/node-globals-polyfill": "^0.2.3",
+    "@esbuild-plugins/node-modules-polyfill": "^0.2.2",
+    "vite-preset-react": "^2.3.0"
   }
 }
