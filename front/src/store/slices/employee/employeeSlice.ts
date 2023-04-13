@@ -1,7 +1,9 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 // import type { PayloadAction } from "@reduxjs/toolkit";
 import axios from "axios";
-const API_URL = "http://localhost:3001";
+import dotenv from "dotenv";
+dotenv.config();
+axios.defaults.baseURL = process.env.REACT_APP_API || "http://localhost:3001";
 
 export interface EmployeeState {
 	values: any[];
@@ -25,7 +27,7 @@ interface PutEmployee extends Employee {
 export const fetchAllEmployees = createAsyncThunk(
 	"employee/fetchAllEmployees",
 	async () => {
-		const response = await axios.get(API_URL + "/employee/wlogs");
+		const response = await axios.get("/employee/wlogs");
 		return response.data;
 	}
 );
@@ -33,7 +35,7 @@ export const fetchAllEmployees = createAsyncThunk(
 export const putEmployee = createAsyncThunk(
 	"employee/putEmployee",
 	async ({ id, name, dni, address, phone }: PutEmployee) => {
-		const response = await axios.put(API_URL + `/employee/${id}`, {
+		const response = await axios.put(`/employee/${id}`, {
 			name,
 			dni,
 			address: address !== "" ? address : null,
@@ -47,7 +49,7 @@ export const putEmployee = createAsyncThunk(
 export const createEmployee = createAsyncThunk(
 	"employee/createEmployee",
 	async ({ name, dni, address, phone }: Employee) => {
-		const response = await axios.post(API_URL + `/employee/`, {
+		const response = await axios.post(`/employee/`, {
 			name,
 			dni,
 			address,
@@ -60,7 +62,7 @@ export const createEmployee = createAsyncThunk(
 export const deleteEmployee = createAsyncThunk(
 	"employee/deleteEmployee",
 	async (id: number) => {
-		const response = await axios.delete(API_URL + `/employee/${id}`);
+		const response = await axios.delete(`/employee/${id}`);
 		return response.data;
 	}
 );
@@ -68,7 +70,7 @@ export const deleteEmployee = createAsyncThunk(
 export const uploadStates = createAsyncThunk(
 	"employee/uploadStates",
 	async ({ states, id }: any) => {
-		const response = await axios.post(API_URL + `/employee/state/${id}`, {
+		const response = await axios.post(`/employee/state/${id}`, {
 		states
 		});
 		console.log(response.data);
