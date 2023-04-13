@@ -1,9 +1,9 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 // import type { PayloadAction } from "@reduxjs/toolkit";
 import axios from "axios";
-import dotenv from 'dotenv';
-dotenv.config();
-const API_URL = process.env.REACT_APP_API || "http://localhost:3001";
+import dotenv from 'dotenv'
+dotenv.config()
+const API_URL = "http://localhost:3001/api";
 
 export interface EmployeeState {
 	values: any[];
