@@ -140,7 +140,7 @@ function BtnPresentismo({ employee }) {
 				<DialogContent>
 					<p>{`${employee.name} DNI ${employee.dni}`}</p>
 					<QRCode
-						value={`http://${ip}:3000/qr/${state ? 0 : 1}/${
+						value={`https://tuasistencia.ar/qr/${state ? 0 : 1}/${
 							employee.dni
 						}`}
 					/>
