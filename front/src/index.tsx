@@ -1,9 +1,9 @@
 import React from "react";
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from "react-router-dom";
-import { createRoot } from "react-dom/client";
 import { Provider } from "react-redux";
 import { store } from "./store";
+import { Auth0Provider } from "@auth0/auth0-react";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import "./index.css";
@@ -11,11 +11,23 @@ import "./index.css";
 // const container = document.getElementById("root")!;
 // const root = createRoot(container);
 
+// console.log(process.env.REACT_APP_AUTH0_DOMAIN,
+// 	process.env.REACT_APP_AUTH0_CLIENT_ID,
+// );
+
 ReactDOM.render(
 	<React.StrictMode>
 		<Provider store={store}>
 			<BrowserRouter>
-				<App />
+				<Auth0Provider
+					domain="http://localhost:3001"
+					clientId="pJ5QUS79v5nj3NIXoalOu0VU4IUNjiWF"
+					authorizationParams={{
+						redirect_uri: window.location.origin
+					}}
+				>
+					<App />
+				</Auth0Provider>,
 			</BrowserRouter>
 		</Provider>
 	</React.StrictMode>,

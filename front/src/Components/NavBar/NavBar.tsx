@@ -13,6 +13,8 @@ import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 import Avatar from "@mui/material/Avatar";
 import Stack from "@mui/material/Stack";
+import { useAuth0 } from "@auth0/auth0-react";
+
 
 import logoAsist from "../../static/images/avatar/logoAsist.jpg";
 
@@ -33,18 +35,20 @@ function NavBar() {
     setAnchorElNav(null);
   };
 
+  const { loginWithRedirect } = useAuth0();
+
   return (
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-            <Stack direction="row" spacing={0} >
-             <Avatar
-                  alt="Logo"
-                  src={logoAsist}
-                  sx={{ width: 55, height:55, border: '3px solid black', marginRight: '45px' }}
-                                />
-                 </Stack>
-     
+          <Stack direction="row" spacing={0} >
+            <Avatar
+              alt="Logo"
+              src={logoAsist}
+              sx={{ width: 55, height: 55, border: '3px solid black', marginRight: '45px' }}
+            />
+          </Stack>
+
           <Typography
             variant="h6"
             noWrap
@@ -60,11 +64,11 @@ function NavBar() {
               textDecoration: "none",
               userSelect: "none",
             }}
-          >      
+          >
             TU ASISTENCIA
           </Typography>
 
-           
+
           <Box
             sx={{
               flexGrow: 1,
@@ -164,11 +168,16 @@ function NavBar() {
                 </Link>
               </Button>
             ))}
+
           </Box>
+
+
+          <Button style={{ color: "black" }} onClick={() => loginWithRedirect()}>Login</Button>
+
         </Toolbar>
-       
+
       </Container>
-    </AppBar>
+    </AppBar >
   );
 }
 export default NavBar;

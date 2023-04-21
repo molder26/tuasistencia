@@ -3,9 +3,9 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
 // local
-// const API_URL = "http://localhost:3001";
+const API_URL = "http://localhost:3001";
 // aws
-const API_URL = "https://tuasistencia.ar/api";
+// const API_URL = "https://tuasistencia.ar/api";
 
 export interface EmployeeState {
 	values: any[];
@@ -73,7 +73,7 @@ export const uploadStates = createAsyncThunk(
 	"employee/uploadStates",
 	async ({ states, id }: any) => {
 		const response = await axios.post(API_URL + `/employee/state/${id}`, {
-		states
+			states
 		});
 		console.log(response.data);
 		return response.data;
