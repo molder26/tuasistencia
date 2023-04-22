@@ -171,7 +171,6 @@ function NavBar() {
 
           </Box>
 
-
           <Button style={{ color: "black" }} onClick={() => loginWithRedirect()}>Login</Button>
 
         </Toolbar>
