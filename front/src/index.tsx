@@ -8,13 +8,16 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import "./index.css";
 
+const AUTH0_DOMAIN = import.meta.env.VITE_AUTH0_DOMAIN;
+const AUTH0_CLIENT_ID = import.meta.env.VITE_AUTH0_CLIENT_ID;
+
 ReactDOM.render(
 	<React.StrictMode>
 		<Provider store={store}>
 			<BrowserRouter>
 				<Auth0Provider
-					domain={import.meta.env.VITE_AUTH0_DOMAIN}
-					clientId={import.meta.env.VITE_AUTH0_CLIENT_ID}
+					domain={AUTH0_DOMAIN}
+					clientId={AUTH0_CLIENT_ID}
 					authorizationParams={{
 						redirect_uri: window.location.origin,
 					}}

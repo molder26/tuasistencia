@@ -3,9 +3,11 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
 // local
-const API_URL = "http://localhost:3001";
+// const API_URL = "http://localhost:3001";
 // aws
 // const API_URL = "https://tuasistencia.ar/api";
+
+const API_URL = import.meta.env.VITE_API_URL;
 
 export interface EmployeeState {
 	values: any[];
