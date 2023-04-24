@@ -173,7 +173,7 @@ function NavBar() {
             ))}
 
           </Box>
-          <Stack direction="row" spacing={1} width={360} justifyContent="space-evenly">
+          <Stack direction="row" spacing={1} width={340} justifyContent="space-evenly">
             <Stack direction="row" justifyContent="end" width={250} >
               <Perfil />
             </Stack>

@@ -6,8 +6,8 @@ export default function BotonLogout() {
   const { logout } = useAuth0();
   return (
     <Stack direction="row" justifyItems="end" width={210} alignItems="center" >
-      <Button style={{ color: "black", marginLeft: "50px", border: "2px solid black", height: "50px" }} onClick={() => logout()}>
-        Cerrar Sesion
+      <Button style={{ color: "black", marginLeft: "50px", border: "2px solid black", height: "30px", padding: "18px", width: "50px" }} onClick={() => logout()}>
+        <span style={{ fontSize: "11px" }}> Cerrar Sesion</span>
       </Button>
     </Stack>
   )
