@@ -5,8 +5,8 @@ import Button from "@mui/material/Button";
 export default function BotonLogin() {
   const { loginWithRedirect } = useAuth0();
   return (
-    <Button style={{ color: "black", border: "2px solid black", height: "30px", marginRight: "40px" }} onClick={() => loginWithRedirect()}>
-      Login
+    <Button style={{ color: "black", border: "2px solid black", padding: "25px", height: "40px", width: "80px", marginRight: "40px" }} onClick={() => loginWithRedirect()}>
+      Iniciar Sesion
     </Button>
   );
 }
