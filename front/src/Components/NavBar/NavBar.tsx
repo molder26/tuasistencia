@@ -39,7 +39,7 @@ function NavBar() {
     setAnchorElNav(null);
   };
 
-  const { isAuthenticated } = useAuth0();
+  const { isAuthenticated, user } = useAuth0();
 
   return (
     <AppBar position="static">
@@ -173,9 +173,12 @@ function NavBar() {
             ))}
 
           </Box>
-          <Perfil />
-          {isAuthenticated ? <BotonLogout /> : <BotonLogin />}
-
+          <Stack direction="row" spacing={1} width={360} justifyContent="space-evenly">
+            <Stack direction="row" justifyContent="end" width={250} >
+              <Perfil />
+            </Stack>
+            {isAuthenticated ? <BotonLogout /> : <BotonLogin />}
+          </Stack>
         </Toolbar>
       </Container>
     </AppBar >
