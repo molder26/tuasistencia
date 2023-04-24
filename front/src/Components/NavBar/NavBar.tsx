@@ -16,7 +16,11 @@ import Stack from "@mui/material/Stack";
 import { useAuth0 } from "@auth0/auth0-react";
 
 
-import logoAsist from "../../static/images/avatar/logoAsist.jpg";
+
+import logoAsist from '../../static/images/avatar/logoAsist.jpg';
+import BotonLogin from '../BotonLogin/BotonLogin';
+import Perfil from '../BotonLogin/Perfil';
+import BotonLogout from '../BotonLogin/BotonLogout';
 
 const pages = ["Marcacion", "Empleados", "Informes", "Contacto"];
 
@@ -35,7 +39,7 @@ function NavBar() {
     setAnchorElNav(null);
   };
 
-  const { loginWithRedirect } = useAuth0();
+  const { isAuthenticated } = useAuth0();
 
   return (
     <AppBar position="static">
@@ -48,7 +52,6 @@ function NavBar() {
               sx={{ width: 55, height: 55, border: '3px solid black', marginRight: '45px' }}
             />
           </Stack>
-
           <Typography
             variant="h6"
             noWrap
@@ -170,11 +173,10 @@ function NavBar() {
             ))}
 
           </Box>
-
-          <Button style={{ color: "black" }} onClick={() => loginWithRedirect()}>Login</Button>
+          <Perfil />
+          {isAuthenticated ? <BotonLogout /> : <BotonLogin />}
 
         </Toolbar>
-
       </Container>
     </AppBar >
   );
