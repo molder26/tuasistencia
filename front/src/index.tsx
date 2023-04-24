@@ -1,5 +1,5 @@
 import React from "react";
-import ReactDOM from 'react-dom';
+import ReactDOM from "react-dom";
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import { store } from "./store";
@@ -8,30 +8,27 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import "./index.css";
 
-// const container = document.getElementById("root")!;
-// const root = createRoot(container);
-
-// console.log(process.env.REACT_APP_AUTH0_DOMAIN,
-// 	process.env.REACT_APP_AUTH0_CLIENT_ID,
-// );
+const AUTH0_DOMAIN = import.meta.env.VITE_AUTH0_DOMAIN;
+const AUTH0_CLIENT_ID = import.meta.env.VITE_AUTH0_CLIENT_ID;
 
 ReactDOM.render(
 	<React.StrictMode>
 		<Provider store={store}>
 			<BrowserRouter>
 				<Auth0Provider
-					domain="dev-o8v6r4c361nuu7wl.us.auth0.com"
-					clientId="pJ5QUS79v5nj3NIXoalOu0VU4IUNjiWF"
+					domain={AUTH0_DOMAIN}
+					clientId={AUTH0_CLIENT_ID}
 					authorizationParams={{
-						redirect_uri: window.location.origin
+						redirect_uri: window.location.origin,
 					}}
 				>
 					<App />
-				</Auth0Provider>,
+				</Auth0Provider>
+				,
 			</BrowserRouter>
 		</Provider>
 	</React.StrictMode>,
-	document.getElementById('root')
+	document.getElementById("root")
 );
 
 // If you want to start measuring performance in your app, pass a function
