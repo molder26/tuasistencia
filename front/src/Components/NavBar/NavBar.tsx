@@ -14,7 +14,7 @@ import AdbIcon from "@mui/icons-material/Adb";
 import Avatar from "@mui/material/Avatar";
 import Stack from "@mui/material/Stack";
 import { useAuth0 } from "@auth0/auth0-react";
-
+import Swal from 'sweetalert2';
 
 
 import logoAsist from '../../static/images/avatar/logoAsist.jpg';
@@ -41,6 +41,26 @@ function NavBar() {
 
   const { isAuthenticated, user } = useAuth0();
 
+  const handleSweetAlert = () => {
+
+    Swal.fire({
+      title: 'Estas Seguro?',
+      text: "No podras revertir esto!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si, Elimínalo!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire(
+          'Eliminado!',
+          'Su archivo ha sido eliminado.',
+          'success'
+        )
+      }
+    })
+  };
   return (
     <AppBar position="static">
       <Container maxWidth="xl">
@@ -173,11 +193,17 @@ function NavBar() {
             ))}
 
           </Box>
+
           <Stack direction="row" spacing={1} width={340} justifyContent="space-evenly">
             <Stack direction="row" justifyContent="end" width={250} >
+
               <Perfil />
             </Stack>
             {isAuthenticated ? <BotonLogout /> : <BotonLogin />}
+          </Stack>
+          <Stack >
+            <Button sx={{ color: "white", border: "2px solid black" }} onClick={handleSweetAlert} >Sweet Alert Prueba</Button>
+
           </Stack>
         </Toolbar>
       </Container>
