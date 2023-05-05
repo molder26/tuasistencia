@@ -36,7 +36,7 @@ export const TablaEmpleados = () => {
 	const { employees, isFetching } = useFetchEmployee();
 
 	const handleDelete = (id) => {
-		
+
 		Swale.fire({
 			title: 'Esta seguro que quiere eliminar Usuario?',
 			text: "No podra revertir esta accion!",
@@ -45,16 +45,16 @@ export const TablaEmpleados = () => {
 			confirmButtonColor: '#3085d6',
 			cancelButtonColor: '#d33',
 			confirmButtonText: 'Si, Eliminarlo!'
-		  }).then((result) => {
+		}).then((result) => {
 			if (result.isConfirmed) {
 				dispatch(deleteEmployee(id));
-			  Swal.fire(
-				'Eliminado!',
-				'Usuario Eliminado Con Exito.',
-				'Exito'
-			  )
+				Swal.fire(
+					'Eliminado!',
+					'Usuario Eliminado Con Exito.',
+					'Exito'
+				)
 			}
-		  })
+		})
 	};
 
 	const handleEdit = (employee) => {
@@ -65,6 +65,17 @@ export const TablaEmpleados = () => {
 		formik.setFieldValue("id", employee.id);
 		handleOpen();
 	};
+
+	const HandleMessaggeEdit = () => {
+		Swal.fire({
+			position: 'top-center',
+			icon: 'success',
+			title: 'Has editado Empleado con Exito!',
+			showConfirmButton: false,
+			timer: 1700
+		})
+	}
+
 
 	const columns = [
 		{
@@ -144,12 +155,13 @@ export const TablaEmpleados = () => {
 		onSubmit: (values) => {
 			console.log(values);
 			dispatch(putEmployee(values));
+			HandleMessaggeEdit();
 			handleClose();
 		},
 		onReset: () => handleClose(),
 	});
 
-	if (isFetching) return <Spinner/>;
+	if (isFetching) return <Spinner />;
 
 	return (
 		<>
@@ -168,7 +180,7 @@ export const TablaEmpleados = () => {
 				<Box >
 					<DialogContent >
 						<DialogContentText style={{ margin: "0 0 9% 0" }}>
-						   	 Editar los campos del empleado que se requieran            
+							Editar los campos del empleado que se requieran
 						</DialogContentText>
 						<form onSubmit={formik.handleSubmit} >
 							<div className={style.textFields}>
@@ -271,6 +283,7 @@ export const TablaEmpleados = () => {
 					</DialogContent>
 				</Box>
 			</Dialog>
+
 		</>
 	);
 };

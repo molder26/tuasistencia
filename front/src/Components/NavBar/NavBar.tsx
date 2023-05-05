@@ -41,26 +41,7 @@ function NavBar() {
 
   const { isAuthenticated, user } = useAuth0();
 
-  const handleSweetAlert = () => {
 
-    Swal.fire({
-      title: 'Estas Seguro?',
-      text: "No podras revertir esto!",
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Si, Elimínalo!'
-    }).then((result) => {
-      if (result.isConfirmed) {
-        Swal.fire(
-          'Eliminado!',
-          'Su archivo ha sido eliminado.',
-          'success'
-        )
-      }
-    })
-  };
   return (
     <AppBar position="static">
       <Container maxWidth="xl">
@@ -201,10 +182,7 @@ function NavBar() {
             </Stack>
             {isAuthenticated ? <BotonLogout /> : <BotonLogin />}
           </Stack>
-          <Stack >
-            <Button sx={{ color: "white", border: "2px solid black" }} onClick={handleSweetAlert} >Sweet Alert Prueba</Button>
 
-          </Stack>
         </Toolbar>
       </Container>
     </AppBar >

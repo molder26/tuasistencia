@@ -11,6 +11,7 @@ import style from "./Empleados.module.css";
 import { createEmployee } from "../../store/slices/employee/employeeSlice";
 import { useAppDispatch } from "../../app/hooks";
 import { Box } from "@mui/material";
+import Swal from "sweetalert2";
 
 const validationSchema = Yup.object().shape({
   name: Yup.string().required("El Campo nombre es requerido"),
@@ -18,6 +19,16 @@ const validationSchema = Yup.object().shape({
   address: Yup.string().nullable().optional(),
   phone: Yup.string().nullable().notRequired(),
 });
+
+export function ChargedEmployee() {
+  Swal.fire({
+    position: 'top-center',
+    icon: 'success',
+    title: 'Empleado cargado',
+    showConfirmButton: false,
+    timer: 1500
+  })
+}
 
 export function FormDialog() {
   const dispatch = useAppDispatch();
@@ -31,7 +42,7 @@ export function FormDialog() {
     setOpen(false);
   };
 
-  const formik: any = useFormik({
+  const formik = useFormik({
     initialValues: {
       name: "",
       dni: "",
@@ -39,17 +50,20 @@ export function FormDialog() {
       phone: null,
     },
     validationSchema: validationSchema,
-    onSubmit: (values: any) => {
+    onSubmit: (values) => {
       dispatch(createEmployee(values));
       handleClose();
+      ChargedEmployee()
     },
     onReset: () => handleClose(),
   });
+
 
   return (
     <div>
       <div className={style.btnNewClient}>
         <Button variant="contained" onClick={handleClickOpen}>
+
           Nuevo Empleado
         </Button>
       </div>
