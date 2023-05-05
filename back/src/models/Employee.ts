@@ -5,7 +5,10 @@ const { DataTypes } = require("sequelize");
 module.exports = (sequelize: Sequelize) => {
     // defino el modelo
     sequelize.define("employee", {
-
+        idUser: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
 
         id: {
             type: DataTypes.INTEGER,

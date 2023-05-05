@@ -1,7 +1,7 @@
 import React from "react";
 import { TablaEmpleados } from "./TablaEmpleadosEdit";
 import NavBar from "../NavBar/NavBar";
-import { FormDialog } from "./Modal";
+import { FormDialog } from "./ModalNuevoEmpleado";
 
 function Empleados() {
     return (

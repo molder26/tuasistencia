@@ -44,34 +44,38 @@ function NavBar() {
 
   return (
     <AppBar position="static">
-      <Container maxWidth="xl">
-        <Toolbar disableGutters>
-          <Stack direction="row" spacing={0} >
+      <Container maxWidth="xl" >
+        <Toolbar disableGutters sx={{ justifyContent: "space-between" }}>
+          <Stack direction="row"  >
             <Avatar
               alt="Logo"
               src={logoAsist}
               sx={{ width: 55, height: 55, border: '3px solid black', marginRight: '45px' }}
             />
           </Stack>
-          <Typography
-            variant="h6"
-            noWrap
-            component="a"
-            href="/"
-            sx={{
-              mr: 2,
-              display: { xs: "none", md: "flex" },
-              fontFamily: "monospace",
-              fontWeight: 700,
-              letterSpacing: ".3rem",
-              color: "inherit",
-              textDecoration: "none",
-              userSelect: "none",
-            }}
-          >
-            TU ASISTENCIA
-          </Typography>
-
+          <Stack justifyContent="start" width="100%">
+            <Typography
+              // justifyItems="start"
+              width="100%"
+              variant="h6"
+              noWrap
+              component="a"
+              href="/"
+              sx={{
+                display: { xs: "none", md: "flex" },
+                // border: "2px solid black",
+                width: "90%",
+                fontFamily: "monospace",
+                fontWeight: 700,
+                letterSpacing: ".3rem",
+                color: "inherit",
+                textDecoration: "none",
+                userSelect: "none",
+              }}
+            >
+              TU ASISTENCIA
+            </Typography>
+          </Stack>
 
           <Box
             sx={{
@@ -148,35 +152,40 @@ function NavBar() {
           >
             TU ASISTENCIA
           </Typography>
-          <Box
-            sx={{
-              flexGrow: 1,
-              display: { xs: "none", md: "flex" },
-            }}
-          >
-            {pages.map((page) => (
-              <Button
-                key={page}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: "white", display: "block" }}
-                disabled={page === location.pathname.split("/").pop()}
+          {
+            isAuthenticated && (
+              <Stack
+                sx={{
+                  flexDirection: "row",
+                  display: { xs: "none", md: "flex" },
+                  // border: "2px solid black",
+                  justifyContent: "space-between",
+                  mr: 8,
+                }}
               >
-                <Link
-                  style={{
-                    textDecoration: "none",
-                    color: "white",
-                  }}
-                  to={`/${page}`}
-                >
-                  {page}
-                </Link>
-              </Button>
-            ))}
+                {pages.map((page) => (
+                  <Button
+                    key={page}
+                    onClick={handleCloseNavMenu}
+                    sx={{ my: 2, color: "white", display: "block" }}
+                    disabled={page === location.pathname.split("/").pop()}
+                  >
+                    <Link
+                      style={{
+                        textDecoration: "none",
+                        color: "white",
+                      }}
+                      to={`/${page}`}
+                    >
+                      {page}
+                    </Link>
+                  </Button>
+                ))}
 
-          </Box>
-
-          <Stack direction="row" spacing={1} width={340} justifyContent="space-evenly">
-            <Stack direction="row" justifyContent="end" width={250} >
+              </Stack>
+            )}
+          <Stack direction="row" spacing={1} width={340} >
+            <Stack direction="row" width={250} >
 
               <Perfil />
             </Stack>

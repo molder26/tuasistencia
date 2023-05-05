@@ -1,7 +1,7 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
 import LandingPage from "./Components/LandingPage/LandingPage";
-import Empleados from "./Components/Empleados/Empleados";
+import Empleados from "./Components/Empleados/IndexEmpleados";
 import Informes from "./Components/Informes/Informes";
 import Marcacion from "./Components/Marcacion/Marcacion";
 import Contacto from "./Components/Contacto/Contacto";

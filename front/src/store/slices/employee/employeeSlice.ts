@@ -18,6 +18,7 @@ const initialState: EmployeeState = {
 };
 
 type Employee = {
+	idUser: string;
 	name: string;
 	dni: string;
 	address?: string;

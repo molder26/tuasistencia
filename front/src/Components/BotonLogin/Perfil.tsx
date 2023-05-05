@@ -4,6 +4,8 @@ import { Stack } from '@mui/material';
 
 export default function Perfil() {
     const { user, isAuthenticated } = useAuth0();
+    const idUser = isAuthenticated && (user?.sub);
+    console.log(idUser);
     return (
         <>
             {
