@@ -55,7 +55,6 @@ function NavBar() {
           </Stack>
           <Stack justifyContent="start" width="100%">
             <Typography
-              // justifyItems="start"
               width="100%"
               variant="h6"
               noWrap

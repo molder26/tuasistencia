@@ -21,6 +21,30 @@ exports.getAll = async (req: Request, res: Response) => {
 	}
 };
 
+
+// exports.getIdUser = async (req: Request, res: Response) => {
+// 	try {
+// 		const idUser = await Employee.findAll({
+// 			order: [["idUser", "ASC"]],
+// 			where: {
+// 				deletedAt: {
+// 					[Op.eq]: null,
+// 				},
+// 			},
+// 		});
+// 		console.log(idUser);
+// 		return res.json(idUser);
+// 	} catch (error) {
+// 		console.log(error);
+// 		res.status(400).json({
+// 			msg: error,
+// 		});
+// 	}
+
+
+// }
+
+
 exports.getAllWithLastLog = async (req: Request, res: Response) => {
 	try {
 		const employees = await Employee.findAll({

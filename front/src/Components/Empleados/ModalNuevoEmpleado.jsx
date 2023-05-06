@@ -33,7 +33,6 @@ export function ChargedEmployee() {
 export function FormDialog() {
   const dispatch = useAppDispatch();
   const [open, setOpen] = React.useState(false);
-
   const handleClickOpen = () => {
     setOpen(true);
   };

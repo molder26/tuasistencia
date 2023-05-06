@@ -1,11 +1,23 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useAuth0 } from '@auth0/auth0-react'
 import { Stack } from '@mui/material';
+import { useAppDispatch, useAppSelector } from "../../app/hooks";
+import { setUser, resetUser } from "../../store/slices/user/userSlice";
+
 
 export default function Perfil() {
     const { user, isAuthenticated } = useAuth0();
     const idUser = isAuthenticated && (user?.sub);
-    console.log(idUser);
+
+    const dispatch = useAppDispatch();
+    const userState: any = useAppSelector(
+        (state) => state.users.idUser
+    );
+
+    useEffect(() => {
+        dispatch(setUser(idUser))
+    }, [idUser])
+
     return (
         <>
             {

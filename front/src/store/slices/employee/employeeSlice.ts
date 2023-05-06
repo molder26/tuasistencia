@@ -18,7 +18,6 @@ const initialState: EmployeeState = {
 };
 
 type Employee = {
-	idUser: string;
 	name: string;
 	dni: string;
 	address?: string;
@@ -106,7 +105,7 @@ export const employeeSlice = createSlice({
 		builder.addCase(putEmployee.fulfilled, (state, action) => {
 			// Add user to the state array
 			state.values = state.values.map((item) => {
-				let { id, name, dni, address, phone } = item;
+				let { id, name, dni, address, phone, idUser } = item;
 				if (item.id === action.payload.id) {
 					id = action.payload.id;
 					name = action.payload.name;
@@ -120,7 +119,7 @@ export const employeeSlice = createSlice({
 					name,
 					dni,
 					address,
-					phone
+					phone,
 				};
 			});
 		});
