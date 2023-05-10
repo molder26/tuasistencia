@@ -12,7 +12,9 @@ export default function Perfil() {
     const dispatch = useAppDispatch();
     const userState: any = useAppSelector(
         (state) => state.users.idUser
+
     );
+    console.log(userState);
 
     useEffect(() => {
         dispatch(setUser(idUser))

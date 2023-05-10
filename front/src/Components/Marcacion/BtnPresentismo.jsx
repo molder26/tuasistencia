@@ -74,14 +74,13 @@ function BtnPresentismo({ employee }) {
 				>
 					<CloseIcon />
 				</IconButton>
+
 				<DialogTitle>Marcar {state ? "Entrada" : "Salida"}</DialogTitle>
 				<DialogContent>
 					<p>{`${employee.name} DNI ${employee.dni}`}</p>
 					<QRCode
 						// value={`https://tuasistencia.ar/qr/${state ? 0 : 1}/${
-						value={`${URL}/qr/${state ? 0 : 1}/${
-							employee.dni
-						}?ip=${ip}`}
+						value={`${URL}/qr/${state ? 0 : 1}/${employee.dni}?ip=${ip}`}
 					/>
 				</DialogContent>
 			</Dialog>
@@ -90,6 +89,8 @@ function BtnPresentismo({ employee }) {
 			</div> */}
 		</>
 	);
+
+
 }
 
 export default BtnPresentismo;

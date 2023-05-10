@@ -27,7 +27,7 @@ io.on("connection", (socket: any) => {
 
 // io.listen(10500);
 
-conn.sync({ force: false }).then(() => {
+conn.sync({ force: true }).then(() => {
 	console.log("Modelos Sincronizados");
 	httpServer.listen(PORT || 3001, () => {
 		console.log(`%s listening at ${PORT || 3001}`); // eslint-disable-line no-console

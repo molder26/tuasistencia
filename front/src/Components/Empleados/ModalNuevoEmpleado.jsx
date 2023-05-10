@@ -9,7 +9,7 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import style from "./Empleados.module.css";
 import { createEmployee } from "../../store/slices/employee/employeeSlice";
-import { useAppDispatch } from "../../app/hooks";
+import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { Box } from "@mui/material";
 import Swal from "sweetalert2";
 
@@ -32,6 +32,9 @@ export function ChargedEmployee() {
 
 export function FormDialog() {
   const dispatch = useAppDispatch();
+  const idUser = useAppSelector(
+    (state) => state.users.idUser
+  );
   const [open, setOpen] = React.useState(false);
   const handleClickOpen = () => {
     setOpen(true);
@@ -47,6 +50,7 @@ export function FormDialog() {
       dni: "",
       address: null,
       phone: null,
+      idUser: idUser,
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {

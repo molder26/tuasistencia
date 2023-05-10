@@ -89,6 +89,7 @@ exports.getById = async (req: Request, res: Response) => {
 
 exports.postId = async (req: Request, res: Response) => {
 	const { body } = req;
+	console.log(body);
 	try {
 		const newEmployee = new Employee(body);
 		await newEmployee.save();
