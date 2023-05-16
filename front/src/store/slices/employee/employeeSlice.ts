@@ -62,6 +62,7 @@ export const createEmployee = createAsyncThunk(
 			phone,
 			idUser,
 		});
+		console.log(idUser);
 		return response.data;
 	}
 );
@@ -78,7 +79,7 @@ export const uploadStates = createAsyncThunk(
 	"employee/uploadStates",
 	async ({ states, id }: any) => {
 		const response = await axios.post(API_URL + `/employee/state/${id}`, {
-			states
+			states,
 		});
 		console.log(response.data);
 		return response.data;
