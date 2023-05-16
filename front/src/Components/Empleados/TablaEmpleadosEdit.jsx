@@ -2,8 +2,11 @@ import MUIDataTable from "mui-datatables";
 import EditIcon from "@mui/icons-material/Edit";
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { useAppDispatch } from "../../app/hooks";
-import { deleteEmployee, putEmployee, } from "../../store/slices/employee/employeeSlice";
+import { useAppDispatch, useAppSelector } from "../../app/hooks";
+import {
+	deleteEmployee,
+	putEmployee,
+} from "../../store/slices/employee/employeeSlice";
 import { useFetchEmployee } from "../../hooks/Empleados/useFetchEmployee";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
@@ -13,13 +16,13 @@ import * as Yup from "yup";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import style from "./Empleados.module.css";
 import { Box } from "@mui/material";
 import Spinner from "../spinner/Spinner";
-import Swal from 'sweetalert2';
+import Swal from "sweetalert2";
 
-import Swale from 'sweetalert2';
+import Swale from "sweetalert2";
 const validationSchema = Yup.object().shape({
 	name: Yup.string().required("El Campo nombre es requerido"),
 	dni: Yup.string().required("El Campo dni es requerido"),
@@ -36,25 +39,24 @@ export const TablaEmpleados = () => {
 	const { employees, isFetching } = useFetchEmployee();
 
 	const handleDelete = (id) => {
-
 		Swale.fire({
-			title: 'Esta seguro que quiere eliminar Usuario?',
+			title: "Esta seguro que quiere eliminar Usuario?",
 			text: "No podra revertir esta accion!",
-			icon: 'warning',
+			icon: "warning",
 			showCancelButton: true,
-			confirmButtonColor: '#3085d6',
-			cancelButtonColor: '#d33',
-			confirmButtonText: 'Si, Eliminarlo!'
+			confirmButtonColor: "#3085d6",
+			cancelButtonColor: "#d33",
+			confirmButtonText: "Si, Eliminarlo!",
 		}).then((result) => {
 			if (result.isConfirmed) {
 				dispatch(deleteEmployee(id));
 				Swal.fire(
-					'Eliminado!',
-					'Usuario Eliminado Con Exito.',
-					'Exito'
-				)
+					"Eliminado!",
+					"Usuario Eliminado Con Exito.",
+					"Exito"
+				);
 			}
-		})
+		});
 	};
 
 	const handleEdit = (employee) => {
@@ -68,14 +70,13 @@ export const TablaEmpleados = () => {
 
 	const HandleMessaggeEdit = () => {
 		Swal.fire({
-			position: 'top-center',
-			icon: 'success',
-			title: 'Has editado Empleado con Exito!',
+			position: "top-center",
+			icon: "success",
+			title: "Has editado Empleado con Exito!",
 			showConfirmButton: false,
-			timer: 1700
-		})
-	}
-
+			timer: 1700,
+		});
+	};
 
 	const columns = [
 		{
@@ -177,12 +178,12 @@ export const TablaEmpleados = () => {
 			)}
 			<Dialog open={open} onClose={handleClose}>
 				<DialogTitle>Editar Empleado</DialogTitle>
-				<Box >
-					<DialogContent >
+				<Box>
+					<DialogContent>
 						<DialogContentText style={{ margin: "0 0 9% 0" }}>
 							Editar los campos del empleado que se requieran
 						</DialogContentText>
-						<form onSubmit={formik.handleSubmit} >
+						<form onSubmit={formik.handleSubmit}>
 							<div className={style.textFields}>
 								<TextField
 									fullWidth
@@ -196,7 +197,8 @@ export const TablaEmpleados = () => {
 										Boolean(formik.errors.name)
 									}
 									helperText={
-										formik.touched.name && formik.errors.name
+										formik.touched.name &&
+										formik.errors.name
 									}
 									variant="outlined"
 									onBlur={formik.handleBlur}
@@ -254,15 +256,20 @@ export const TablaEmpleados = () => {
 										Boolean(formik.errors.phone)
 									}
 									helperText={
-										formik.touched.phone && formik.errors.phone
+										formik.touched.phone &&
+										formik.errors.phone
 									}
 									variant="outlined"
 									onBlur={formik.handleBlur}
 								/>
 							</div>
-							<Box style={{
-								display: "flex", justifyContent: "space-around", margin: "5% 0 0 0"
-							}}>
+							<Box
+								style={{
+									display: "flex",
+									justifyContent: "space-around",
+									margin: "5% 0 0 0",
+								}}
+							>
 								<Button
 									color="primary"
 									variant="contained"
@@ -283,7 +290,6 @@ export const TablaEmpleados = () => {
 					</DialogContent>
 				</Box>
 			</Dialog>
-
 		</>
 	);
 };

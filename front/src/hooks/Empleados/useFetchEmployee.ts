@@ -7,14 +7,15 @@ export const useFetchEmployee = () => {
 	const employeesState: any = useAppSelector(
 		(state) => state.employees.values
 	);
+	const idUser = useAppSelector((state) => state.users.idUser);
 	const [employees, setEmployees] = useState(null);
 	const [isFetching, setIsFetching] = useState(true);
 
 	useEffect(() => {
-		dispatch(fetchAllEmployees()).finally(() => {
+		dispatch(fetchAllEmployees(idUser)).finally(() => {
 			setIsFetching(false);
 		});
-	}, [dispatch]);
+	}, [dispatch, idUser]);
 
 	useEffect(() => {
 		setEmployees(employeesState);

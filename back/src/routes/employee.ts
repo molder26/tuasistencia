@@ -13,7 +13,7 @@ const {
 
 router.get("/", getAll);
 // router.get("/:idUser", getIdUser);
-router.get("/wlogs", getAllWithLastLog);
+router.get("/wlogs/:id", getAllWithLastLog);
 router.get("/:id", getById);
 router.post("/", postId);
 router.put("/:id", putId);

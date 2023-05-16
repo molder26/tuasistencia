@@ -21,7 +21,6 @@ exports.getAll = async (req: Request, res: Response) => {
 	}
 };
 
-
 // exports.getIdUser = async (req: Request, res: Response) => {
 // 	try {
 // 		const idUser = await Employee.findAll({
@@ -41,15 +40,17 @@ exports.getAll = async (req: Request, res: Response) => {
 // 		});
 // 	}
 
-
 // }
 
-
 exports.getAllWithLastLog = async (req: Request, res: Response) => {
+	const { id } = req.params;
 	try {
 		const employees = await Employee.findAll({
 			order: [["name", "ASC"]],
 			where: {
+				idUser: {
+					[Op.eq]: id,
+				},
 				deletedAt: {
 					[Op.eq]: null,
 				},

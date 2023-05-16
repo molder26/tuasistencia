@@ -10,25 +10,25 @@ import "./App.css";
 // @ts-ignore
 import QrScanner from "./Components/Qr/QrScanner";
 import { useAuth0 } from "@auth0/auth0-react";
-
+// @ts-ignore
+import Spinner from "./Components/spinner/Spinner";
 
 function App() {
-    const { isLoading } = useAuth0();
+	const { isLoading } = useAuth0();
 
-    if (isLoading) {
-        return "Cargando...";
-    }
-    return (
-
-        <Routes>
-            <Route path="/" element={<LandingPage />} />
-            <Route path="/empleados" element={<Empleados />} />
-            <Route path="/informes" element={<Informes />} />
-            <Route path="/marcacion" element={<Marcacion />} />
-            <Route path="/contacto" element={<Contacto />} />
-            <Route path="/qr/:stateId/:employeeId" element={<QrScanner />} />
-        </Routes>
-    );
+	if (isLoading) {
+		return <Spinner />;
+	}
+	return (
+		<Routes>
+			<Route path="/" element={<LandingPage />} />
+			<Route path="/empleados" element={<Empleados />} />
+			<Route path="/informes" element={<Informes />} />
+			<Route path="/marcacion" element={<Marcacion />} />
+			<Route path="/contacto" element={<Contacto />} />
+			<Route path="/qr/:stateId/:employeeId" element={<QrScanner />} />
+		</Routes>
+	);
 }
 
 export default App;
