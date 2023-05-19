@@ -10,6 +10,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import { useAppDispatch } from "../../app/hooks";
 import { fetchAllEmployees } from "../../store/slices/employee/employeeSlice";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 function BtnPresentismo({ employee }) {
 	const dispatch = useAppDispatch();
@@ -41,6 +42,13 @@ function BtnPresentismo({ employee }) {
 	const handleClose = () => {
 		dispatch(fetchAllEmployees());
 		setOpen(false);
+		Swal.fire({
+			position: "top-center",
+			icon: "success",
+			title: "Ingreso registrado",
+			showConfirmButton: false,
+			timer: 1800,
+		});
 	};
 
 	return (
