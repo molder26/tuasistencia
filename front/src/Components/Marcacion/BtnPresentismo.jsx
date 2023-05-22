@@ -51,6 +51,8 @@ function BtnPresentismo({ employee }) {
 		});
 	};
 
+
+
 	return (
 		<>
 			<Box>
@@ -89,7 +91,9 @@ function BtnPresentismo({ employee }) {
 					<QRCode
 						// value={`https://tuasistencia.ar/qr/${state ? 0 : 1}/${
 						value={`${URL}/qr/${state ? 0 : 1}/${employee.dni}?ip=${ip}`}
+
 					/>
+
 				</DialogContent>
 			</Dialog>
 			{/* <div>
