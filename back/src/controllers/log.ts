@@ -1,14 +1,5 @@
 import { Request, Response } from "express";
 const { Log } = require("../db");
-import nodeMailer from 'nodemailer';
-
-
-
-const html = `
-    <h1>Usuario Registrado con exito!! ... </h1>
-    <h2>Bienvenido '{nombre del logueado}'  </h2>
-    <h3>Ahora puede Incorpora sus empleados </h3>
-`
 
 exports.getAll = async (req: Request, res: Response) => {
     try {
@@ -45,28 +36,7 @@ exports.postId = async (req: Request, res: Response) => {
         const newLog = await Log.create(body);
         await newLog.setEmployee(body.employeeId);
         console.log(newLog);
-        if (newLog) {
-            const transporter: any = nodeMailer.createTransport({
-                host: 'smtp.gmail.com',
-                port: 587,
-                auth: {
-                    user: 'gabrielmarzioli@gmail.com',
-                    pass: 'xoqeewpnhoprvcgz',
-                }
 
-            })
-            transporter.sendMail({
-                // remitente
-                from: 'gabrielmarzioli@gmail.com',
-                // mail a quien va dirigido
-                to: 'gabrielmarzioli@gmail.com',
-                // asunto
-                subject: 'prueba de nodemailer',
-                html: html,
-
-            })
-            console.log('Enviado...');
-        }
         return res.status(200).json(newLog);
     } catch (error) {
         console.log(error);

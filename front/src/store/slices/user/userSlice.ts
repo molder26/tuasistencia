@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import axios from "axios";
 // import type { PayloadAction } from "@reduxjs/toolkit";
 
 
@@ -16,6 +17,17 @@ const initialState: userState = {
     idUser: "",
 };
 
+export const createUser = createAsyncThunk(
+	"user/createUser",
+	async ({ idUser }: User) => {
+		const response = await axios.post(API_URL + `/user/`, {
+			idUser,
+		});
+		console.log(idUser);
+		return response.data;
+	}
+);
+
 export const userSlice = createSlice({
     name: "user",
     initialState,
@@ -27,6 +39,13 @@ export const userSlice = createSlice({
             state.idUser = "";
         }
     },
+    extraReducers: (builder) => {
+		// Add reducers for additional action types here, and handle loading state as needed
+		builder.addCase(createUser.fulfilled, (state, action) => {
+			// Add user to the state array
+			state.idUser = action.payload;
+		});
+    }
 });
 
 // Action creators are generated for each case reducer function
