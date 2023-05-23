@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import { Stack } from "@mui/material";
-import { useAppDispatch, useAppSelector } from "../../app/hooks";
+import { useAppDispatch } from "../../app/hooks";
 import {
 	setUser,
 	resetUser,
@@ -16,7 +16,7 @@ export default function Perfil() {
 
 	useEffect(() => {
 		dispatch(setUser(idUser));
-		if (idUser) dispatch(createUser({ idUser: idUser}));
+		if (idUser) dispatch(createUser({ idUser: idUser }));
 	}, [idUser]);
 
 	return (

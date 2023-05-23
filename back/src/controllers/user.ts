@@ -1,12 +1,17 @@
 import { Request, Response } from "express";
 import { Op } from "sequelize";
 import nodemailer from "nodemailer";
+require("dotenv").config();
+
+
 const { Employee, Log, User } = require("../db");
+const { USER_MAIL, TOKEN_GMAIL } = process.env;
 
 const html = `
-    <h1>Usuario Registrado con exito!! ... </h1>
-    <h2>Bienvenido '{nombre del logueado}'  </h2>
-    <h3>Ahora puede Incorpora sus empleados </h3>
+    <h1>Registro exitoso!! </h1>
+    <h2>Bienvenido "pichulo"</h2>
+    <h3>En este momento queda habilitado para Incorporar a sus empleados!!😁</h3>
+	<h3>Tu Asistencia</h3>
 `;
 
 exports.getById = async (req: Request, res: Response) => {
@@ -39,17 +44,17 @@ exports.postId = async (req: Request, res: Response) => {
 				host: "smtp.gmail.com",
 				port: 587,
 				auth: {
-					user: "gabrielmarzioli@gmail.com",
-					pass: "xoqeewpnhoprvcgz",
+					user: USER_MAIL,
+					pass: TOKEN_GMAIL,
 				},
 			});
 			transporter.sendMail({
 				// remitente
-				from: "gabrielmarzioli@gmail.com",
+				from: "tusasistencias@gmail.com",
 				// mail a quien va dirigido
-				to: "gabrielmarzioli@gmail.com",
+				to: "tusasistencias@gmail.com",
 				// asunto
-				subject: "prueba de nodemailer",
+				subject: "Tu asistencia, te da la Bienvenida",
 				html: html,
 			});
 			console.log("Enviado...");
